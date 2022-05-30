@@ -1,0 +1,10 @@
+package com.example.demo.test;
+
+import org.springframework.beans.factory.support.ReplaceOverride;
+
+@DataJpaTest
+@AutoConfigureTestDatabase(replace= ReplaceOverride.NONE)
+
+public class UserRepositoryTest {
+
+}
