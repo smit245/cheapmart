@@ -7,13 +7,14 @@ import java.util.Set;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
+import javax.persistence.ForeignKey;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.JoinColumns;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
-import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 @Entity
@@ -24,16 +25,30 @@ public class Product {
 	private Long id;
 	
 	@ManyToOne
-	@JoinColumn(name = "scid",nullable=false)
+	@JoinColumns(foreignKey = @ForeignKey(name="FK_product_subcategory"),value= {
+			@JoinColumn(referencedColumnName = "id",name = "scid",nullable=false)})
 	private SubCategory subcategory;
 	
 	@ManyToOne
-	@JoinColumn(name = "uid",nullable=false)
+	@JoinColumns(foreignKey = @ForeignKey(name="FK_product_user"),value= {
+			@JoinColumn(referencedColumnName = "id",name = "uid",nullable=false)})
 	private User user;
 	
 	@OneToMany(mappedBy = "product",fetch=FetchType.EAGER)
 	private Set<ProductImage> productimage = new HashSet<>();
 	
+	@OneToMany(mappedBy = "product",fetch=FetchType.EAGER)
+	private Set<Order> order=new HashSet<>();
+	
+	public Set<Order> getOrder() {
+		return order;
+	}
+
+	public void setOrder(Set<Order> order) {
+		this.order = order;
+	}
+
+
 	@Column(nullable = false,length=100)
 	private String name;
 	
@@ -54,8 +69,9 @@ public class Product {
 	
 	
 	//Bidding Details
-	@OneToOne
-	@JoinColumn(name="bidderid")
+	@ManyToOne
+	@JoinColumns(foreignKey = @ForeignKey(name="FK_bidder_product"),value= {
+			@JoinColumn(referencedColumnName = "id",name="bidderid",nullable=false)})
 	private User bidder;
 	
 	@OneToMany(mappedBy = "product",fetch=FetchType.EAGER)
@@ -82,13 +98,13 @@ public class Product {
 	@Column(nullable = false)
 	private Timestamp createdAt=new Timestamp(System.currentTimeMillis());
 	
+	@Column(nullable = false,columnDefinition = "integer default 0")
+	private int status;
+
+	
 	public Timestamp getCreatedAt() {
 		return createdAt;
 	}
-
-
-	@Column(nullable = false,columnDefinition = "integer default 0")
-	private int status;
 
 	public String getPincode() {
 		return pincode;

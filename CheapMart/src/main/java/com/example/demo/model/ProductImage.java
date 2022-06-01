@@ -2,10 +2,12 @@ package com.example.demo.model;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.ForeignKey;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.JoinColumns;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
@@ -17,7 +19,8 @@ public class ProductImage {
 	private Long id;
 	
 	@ManyToOne
-	@JoinColumn(name = "pid",nullable=false)
+	@JoinColumns(foreignKey = @ForeignKey(name="FK_image_product"),value= {
+			@JoinColumn(referencedColumnName = "id",name="pid",nullable=false)})
 	private Product product;
 	
 	@Column(nullable = false,length=1000)

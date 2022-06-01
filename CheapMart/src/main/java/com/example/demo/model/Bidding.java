@@ -5,10 +5,12 @@ import java.sql.Timestamp;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.ForeignKey;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.JoinColumns;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
@@ -16,16 +18,26 @@ import javax.persistence.Table;
 @Table(name="bidding")
 public class Bidding {
 	
+	public Long getId() {
+		return id;
+	}
+
+	public void setId(Long id) {
+		this.id = id;
+	}
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 	
 	@ManyToOne
-	@JoinColumn(name="pid")
+	@JoinColumns(foreignKey = @ForeignKey(name="FK_bidding_product"),value= {
+			@JoinColumn(referencedColumnName = "id",name="pid",nullable=false)})
 	private Product product;
 	
 	@ManyToOne
-	@JoinColumn(name="uid")
+	@JoinColumns(foreignKey = @ForeignKey(name="FK_bidding_user"),value= {
+			@JoinColumn(referencedColumnName = "id",name="uid",nullable=false)})
 	private User user;
 	
 	@Column(nullable = false)
