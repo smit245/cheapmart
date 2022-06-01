@@ -1,2 +1,7 @@
+GitRepositoriesView.GitDirectories=D\:\\project sem2\\cheapmart\\.git;
+GitRepositoriesView.GitDirectories.relative=.git;
+RepositorySearchDialogDeepSearch=false
+RepositorySearchDialogSearchPath=D\:\\project sem2\\cheapmart
+RepositorySearchDialogSkipHidden=false
 core_autoIgnoreDerivedResources=false
 eclipse.preferences.version=1
