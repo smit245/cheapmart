@@ -18,4 +18,9 @@ public class AppController {
 		model.addAttribute("user", new User());
 		return "register";
 	}
+	
+	@GetMapping("/admin")
+	public String viewAdminIndex() {
+		return "admin/index";
+	}
 }

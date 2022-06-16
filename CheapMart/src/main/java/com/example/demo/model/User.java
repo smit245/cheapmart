@@ -28,6 +28,40 @@ public class User {
 	@OneToMany(mappedBy="user", fetch=FetchType.LAZY)
 	private Set<Bidding> bidding = new HashSet<>();
 	
+	
+	@Column(nullable = false,length=100)
+	private String name;
+
+	@Column(nullable =  false,unique=true,length = 45)
+	private String email;
+	
+	@Column(nullable = false,length=10)
+	private String phone;
+
+	@Column(nullable = false,length=6)
+	private String pincode;
+	
+	@Column(nullable = false,length=50)
+	private String city;
+	
+	@Column(nullable = false,length=50)
+	private String State;
+	
+	@Column(nullable = false, length=300)
+	private String address;
+	
+	@Column(nullable = false,length=10)
+	private String gender;
+
+	@Column(nullable = false)
+	private Timestamp createdAt=new Timestamp(System.currentTimeMillis());
+
+	@Column(nullable = false,length=64)
+	private String password;
+	
+	@Column(nullable  = true,columnDefinition = "integer default 0")
+	private int status;
+
 	public Set<Product> getProduct() {
 		return product;
 	}
@@ -43,30 +77,6 @@ public class User {
 	public void setId(Long id) {
 		this.id = id;
 	}
-	@Column(nullable = false,length=100)
-	private String name;
-
-	@Column(nullable =  false,unique=true,length = 45)
-	private String email;
-	
-	@Column(nullable = false,length=10)
-	private String phone;
-
-	@Column(nullable = false,length=50)
-	private String City;
-
-	@Column(nullable = false,length=10)
-	private String Gender;
-
-	@Column(nullable = false)
-	private Timestamp createdAt=new Timestamp(System.currentTimeMillis());
-
-	@Column(nullable = false,length=64)
-	private String password;
-	
-	@Column(nullable  = true,columnDefinition = "integer default 0")
-	private int status;
-
 	public String getPassword() {
 		return password;
 	}
@@ -98,16 +108,34 @@ public class User {
 		this.phone = phone;
 	}
 	public String getCity() {
-		return City;
+		return city;
 	}
 	public void setCity(String city) {
-		City = city;
+		this.city = city;
+	}
+	public String getPincode() {
+		return pincode;
+	}
+	public void setPincode(String pincode) {
+		this.pincode = pincode;
+	}
+	public String getState() {
+		return State;
+	}
+	public void setState(String state) {
+		State = state;
+	}
+	public String getAddress() {
+		return address;
+	}
+	public void setAddress(String address) {
+		this.address = address;
 	}
 	public String getGender() {
-		return Gender;
+		return gender;
 	}
 	public void setGender(String gender) {
-		Gender = gender;
+		this.gender = gender;
 	}
 	public int getStatus() {
 		return status;

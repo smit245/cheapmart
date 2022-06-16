@@ -1,7 +1,0 @@
-package com.example.demo.test;
-
-@DataJpaTest
-@AutoConfigureTestDatabase
-public class UserRepositoryTest {
-
-}
