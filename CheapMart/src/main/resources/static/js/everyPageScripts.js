@@ -119,7 +119,7 @@ $("#registration").submit(function(event){
 });
 
 //pincode api code to get city and state.
-$(".pincode").keyup(function(){
+$(".pincode").on('keyup change',function(){
     let pincode=$(this).val();
     if(pincode.length==6){
         $(".city").val("");

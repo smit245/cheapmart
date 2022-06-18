@@ -69,7 +69,6 @@ INDEX VERSION 1.131+D:\project sem2\cheapmart\.metadata\.plugins\org.eclipse.jdt
 1365383868.index
 2027602356.index
 2287960255.index
-760044200.index
 4053377053.index
 1994952565.index
 3370081573.index
