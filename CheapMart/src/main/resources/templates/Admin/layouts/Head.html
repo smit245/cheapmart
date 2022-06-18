@@ -1,7 +1,7 @@
 <head th:fragment="Head">
         <meta charset="utf-8" >
 
-        <title>CheapMart - Admin Home</title>
+        <title th:text="${title}"></title>
 
         <meta name="description" content="AppUI is a Web App Bootstrap Admin Template created by pixelcave and published on Themeforest">
         <meta name="author" content="pixelcave">
@@ -41,4 +41,10 @@
 
         <!-- Modernizr (browser feature detection library) -->
         <script src="admin/js/vendor/modernizr-3.3.1.min.js"></script>
+        <link rel="stylesheet"
+	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+
+<link rel="stylesheet"
+	href="https://cdn.datatables.net/1.10.12/css/jquery.dataTables.min.css">
+
     </head>
