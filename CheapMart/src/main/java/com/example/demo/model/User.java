@@ -14,9 +14,10 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import javax.persistence.UniqueConstraint;
  
 @Entity
-@Table(name = "users")
+@Table(name = "users",uniqueConstraints = @UniqueConstraint(columnNames = "email "))
 public class User {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -45,7 +46,7 @@ public class User {
 	private String city;
 	
 	@Column(nullable = false,length=50)
-	private String State;
+	private String state;
 	
 	@Column(nullable = false, length=300)
 	private String address;
@@ -120,10 +121,10 @@ public class User {
 		this.pincode = pincode;
 	}
 	public String getState() {
-		return State;
+		return state;
 	}
 	public void setState(String state) {
-		State = state;
+		this.state = state;
 	}
 	public String getAddress() {
 		return address;
