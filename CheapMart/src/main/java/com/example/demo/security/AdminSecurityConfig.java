@@ -1,4 +1,5 @@
-package com.example.demo.encrypt;
+package com.example.demo.security;
+
 
 import org.springframework.context.annotation.Configuration;
 import org.springframework.core.annotation.Order;
@@ -7,35 +8,45 @@ import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 
+
+
 @SuppressWarnings("deprecation")
 @Configuration
-@Order(2)
+@Order(1)
 public class AdminSecurityConfig extends WebSecurityConfigurerAdapter{
 	
 	@Override
 	public void configure(AuthenticationManagerBuilder auth) throws Exception {
 		auth.inMemoryAuthentication()
-			.withUser("admin@gmail.com").password("abcde").roles("Admin");
+			.withUser("admin@gmail.com").password("abcde").authorities("ADMIN");
 	}
 	
 	@Override
 	public void configure(HttpSecurity http) throws Exception {
 		http.authorizeRequests()
 		.antMatchers(
-				"/Admin/js/**",
-				"/Admin/css/**",
-				"/Admin/img/**"
+				"/",
+				"/admin/js/**",
+				"/admin/css/**",
+				"/admin/img/**",
+				"/js/**",
+				"/css/**",
+				"/img/**",
+				"/registration"
 				)
 		.permitAll()
 		.antMatchers("/admin/AdminHome",
 				"/admin/AdminProduct",
 				"/admin/AdminOrders",
 				"/admin/AdminUser")
-		.hasAuthority("Admin")
+		.hasAuthority("ADMIN")
 		.anyRequest()
-		.authenticated().and().formLogin().loginPage("/admin/login")
-		.failureUrl("/admin/login?error=true")
-		.defaultSuccessUrl("/admin/AdminHome", true)
+		.authenticated()
+		.and()
+		.formLogin()
+		.loginPage("/admin/login")
+		.defaultSuccessUrl("/admin/AdminHome")
+		.failureUrl("/admin/login?error")
 		.permitAll().and().logout()
 		.logoutRequestMatcher(new AntPathRequestMatcher("/admin/logout"))
 		.invalidateHttpSession(true)

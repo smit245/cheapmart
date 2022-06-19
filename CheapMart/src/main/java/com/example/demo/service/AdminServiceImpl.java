@@ -6,6 +6,8 @@ import java.util.Optional;
 
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -19,18 +21,22 @@ public class AdminServiceImpl implements AdminService {
 
 	@Autowired
 	private AdminRepository userRepo;
+	
 	@Override
 	public List<User> getAllUserInfo() {
 		return userRepo.findAll();
 	}
+	
 	@Override
 	public Optional<User> getUserByID(long id) {
 		
 		return userRepo.findById(id);
 	}
+	
 	public void delete(long id) {
         userRepo.deleteById(id);
     }
+	
 	@Override
 	public User getUserbyId(long id) {
 		Optional<User> optional = userRepo.findById(id);
@@ -45,10 +51,12 @@ public class AdminServiceImpl implements AdminService {
 		}
 		return user;
 	}
+	
 	@Override
 	public void saveUser(User user) {
 		this.userRepo.save(user);
 	}
+	
 	@Override
 	public Optional<Admin> getAdminByEmail(String email) {
 		return null;

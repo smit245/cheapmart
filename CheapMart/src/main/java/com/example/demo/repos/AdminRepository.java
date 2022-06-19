@@ -9,6 +9,5 @@ import com.example.demo.model.User;
 @Repository
 public interface AdminRepository extends JpaRepository<User, Long> {
 
-	
 }
 

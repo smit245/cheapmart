@@ -1,4 +1,4 @@
-package com.example.demo.encrypt;
+package com.example.demo.security;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
@@ -15,14 +15,14 @@ import com.example.demo.service.UserService;
 
 @SuppressWarnings("deprecation")
 @Configuration
-@Order(1)
+@Order(2)
 public class UserSecurityConfig extends WebSecurityConfigurerAdapter{
 	
 	@Autowired
 	private UserService userService;
 	
 	@Bean
-	public static BCryptPasswordEncoder passwordEncoder() {
+	public static BCryptPasswordEncoder userPasswordEncoder() {
 		return new BCryptPasswordEncoder();
 	}
 	
@@ -30,7 +30,7 @@ public class UserSecurityConfig extends WebSecurityConfigurerAdapter{
 	public DaoAuthenticationProvider authenticationProvider() {
 		DaoAuthenticationProvider auth= new DaoAuthenticationProvider();
 		auth.setUserDetailsService(userService);
-		auth.setPasswordEncoder(passwordEncoder());
+		auth.setPasswordEncoder(userPasswordEncoder());
 		return auth;
 	}
 	
@@ -42,7 +42,7 @@ public class UserSecurityConfig extends WebSecurityConfigurerAdapter{
 	@Override
 	protected void configure(HttpSecurity http) throws Exception{
 		http.authorizeRequests().antMatchers(
-				"/**",
+				"/",
 				"/js/**",
 				"/css/**",
 				"/img/**",
