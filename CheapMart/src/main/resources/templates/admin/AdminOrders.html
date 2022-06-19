@@ -6,19 +6,19 @@ xmlns="http://www.w3.org/1999/xhtml"
     xmlns:th="http://www.thymeleaf.org"
     xmlns:sec="http://www.thymeleaf.org"> <!--<![endif]-->
     
-    <head th:replace="Admin/layouts/Head ::Head"></head>
+    <head th:replace="admin/layouts/Head ::Head"></head>
     <body>
 
         <div id="page-wrapper" class="page-loading">
 
             <div id="page-container" class="header-fixed-top sidebar-visible-lg-full">
 
-               <div th:replace="Admin/layouts/Sidebar :: Sidebar"></div>
+               <div th:replace="admin/layouts/Sidebar :: Sidebar"></div>
 
                 <!-- Main Container -->
                 <div id="main-container">
 
-                    <header th:replace="Admin/layouts/Header :: Header"></header>
+                    <header th:replace="admin/layouts/Header :: Header"></header>
 
                     <!-- Page content -->
                     <div id="page-content">
@@ -136,7 +136,7 @@ xmlns="http://www.w3.org/1999/xhtml"
         <!-- END Page Wrapper -->
 
         <!-- jQuery, Bootstrap, jQuery plugins and Custom JS code -->
-        <div th:replace="Admin/layouts/Scripts :: Scripts"></div>
+        <div th:replace="admin/layouts/Scripts :: Scripts"></div>
 
 	<script>
 		$(document).ready(function() {

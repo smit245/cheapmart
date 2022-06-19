@@ -57,7 +57,7 @@ public class User {
 	@Column(nullable = false)
 	private Timestamp createdAt=new Timestamp(System.currentTimeMillis());
 
-	@Column(nullable = false,length=64)
+	@Column(nullable = false,length=500)
 	private String password;
 	
 	@Column(nullable  = true,columnDefinition = "integer default 0")

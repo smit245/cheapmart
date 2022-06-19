@@ -5,6 +5,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+//import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.example.demo.model.User;
@@ -18,38 +19,44 @@ public class AdminController {
  	
 
 	
-	@GetMapping("/AdminLogin")
+	@GetMapping("/admin/login")
 	public String AdminLogin(Model model) {
 		model.addAttribute("title", "Admin|Login");
-		return "Admin/AdminLogi";
+		return "admin/AdminLogi";
 	}
-	@PostMapping("/AdminHome")
+	@GetMapping("/admin")
+	public String AdminMapping() {
+		return "redirect:/admin/login";
+	}
+	
+	
+	@PostMapping("/admin/AdminHome")
 	public String AdminHome(Model model) {
 		model.addAttribute("title", "Home");
-		return "Admin/AdminIndex";
+		return "admin/AdminIndex";
 	}
-	@GetMapping("/AdminHome")
+	@GetMapping("/admin/AdminHome")
 	public String AdminHome1(Model model) {
 		model.addAttribute("title", "Home");
-		return "Admin/AdminIndex";
+		return "admin/AdminIndex";
 	}
-	@GetMapping("/AdminUser")
+	@GetMapping("/admin/AdminUser")
 	public String AdminUser(Model model) {
 		model.addAttribute("title", "Users");
 		model.addAttribute("user", userService.getAllUserInfo());
-		return "Admin/AdminUsers";
+		return "admin/AdminUsers";
 	}
-	@GetMapping("/AdminProduct")
+	@GetMapping("/admin/AdminProduct")
 	public String AdminProduct(Model model) {
 		model.addAttribute("title", "Products");
-		return "Admin/AdminProduct";
+		return "admin/AdminProduct";
 	}
-	@GetMapping("/AdminOrders")
+	@GetMapping("/admin/AdminOrders")
 	public String AdminOrders(Model model) {
 		model.addAttribute("title", "Orders");
-		return "Admin/AdminOrders";
+		return "admin/AdminOrders";
 	}
-	@GetMapping("/BlockOrUnblock")
+	@GetMapping("/admin/BlockOrUnblock")
 	public String AdminBlockUser(@RequestParam long userId , Model model) 
 	{
 		User user1 = userService.getUserbyId(userId);
@@ -62,6 +69,6 @@ public class AdminController {
 		userService.saveUser(user1);
 		model.addAttribute("user", userService.getAllUserInfo());
 		//userService.delete(userId);
-		 return "redirect:/AdminUser";
+		 return "redirect:/admin/AdminUser";
 	}
 }

@@ -23,9 +23,4 @@ public class AppController {
 	public  String viewRegisterPage() {
 		return "register";
 	}
-	
-	@GetMapping("/admin")
-	public String viewAdminIndex() {
-		return "admin/index";
-	}
 }

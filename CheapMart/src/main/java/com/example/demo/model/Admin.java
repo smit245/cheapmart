@@ -21,7 +21,7 @@ public class Admin {
 	@Column(nullable = false,length=100,unique =true)
 	private String email;
 	
-	@Column(nullable = false,length=64)
+	@Column(nullable = false,length=500)
 	private String password;
 	
 	public void setId(Long id) {
