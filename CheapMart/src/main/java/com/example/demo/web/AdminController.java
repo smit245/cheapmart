@@ -1,6 +1,9 @@
 package com.example.demo.web;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.authentication.AnonymousAuthenticationToken;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -17,24 +20,29 @@ public class AdminController {
 	@Autowired
 	private AdminService userService;
  	
-
+	private boolean isAuthenticated() {
+	    Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+	    if (authentication == null || AnonymousAuthenticationToken.class.
+	      isAssignableFrom(authentication.getClass())) {
+	        return false;
+	    }
+	    return authentication.isAuthenticated();
+	}
 	
 	@GetMapping("/admin/login")
 	public String AdminLogin(Model model) {
 		model.addAttribute("title", "Admin|Login");
+		 if (isAuthenticated()) {
+		        return "redirect:/admin/AdminHome";
+		 }
 		return "admin/AdminLogi";
 	}
+	
 	@GetMapping("/admin")
 	public String AdminMapping() {
 		return "redirect:/admin/login";
 	}
 	
-	
-	@PostMapping("/admin/AdminHome")
-	public String AdminHome(Model model) {
-		model.addAttribute("title", "Home");
-		return "admin/AdminIndex";
-	}
 	@GetMapping("/admin/AdminHome")
 	public String AdminHome1(Model model) {
 		model.addAttribute("title", "Home");
@@ -56,6 +64,7 @@ public class AdminController {
 		model.addAttribute("title", "Orders");
 		return "admin/AdminOrders";
 	}
+	
 	@GetMapping("/admin/BlockOrUnblock")
 	public String AdminBlockUser(@RequestParam long userId , Model model) 
 	{

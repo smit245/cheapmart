@@ -46,8 +46,8 @@ xmlns="http://www.w3.org/1999/xhtml"
 									<td><span th:text="${users.email}"> </span></td>
 									<td><span th:text="${users.city}"> </span></td>
 									<td><span th:text="${users.gender}"> </span></td>
-									<td th:if="${users.status} == 0"><a th:href="@{/BlockOrUnblock(userId=${users.id})}">BLOCK</a></td>
-									<td th:if="${users.status} == 1"><a th:href="@{/BlockOrUnblock(userId=${users.id})}">UNBLOCK</a></td>
+									<td th:if="${users.status} == 0"><a th:href="@{/admin/BlockOrUnblock(userId=${users.id})}">BLOCK</a></td>
+									<td th:if="${users.status} == 1"><a th:href="@{/admin/BlockOrUnblock(userId=${users.id})}">UNBLOCK</a></td>
 								</tr>
 							</tbody>
 							

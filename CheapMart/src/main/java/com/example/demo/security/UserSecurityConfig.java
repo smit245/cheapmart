@@ -42,7 +42,6 @@ public class UserSecurityConfig extends WebSecurityConfigurerAdapter{
 	@Override
 	protected void configure(HttpSecurity http) throws Exception{
 		http.authorizeRequests().antMatchers(
-				"/",
 				"/js/**",
 				"/css/**",
 				"/img/**",
@@ -53,15 +52,15 @@ public class UserSecurityConfig extends WebSecurityConfigurerAdapter{
 				"/buy",
 				"/bid",
 				"/checkout")
-		.hasAuthority("User")
+		.hasAuthority("USER")
 		.anyRequest()
 		.authenticated()
 		.and()
 		.formLogin()
-		.loginPage("/")
+		.loginPage("/login")
 		.permitAll()
 		.failureUrl("/?error=true")
-		.defaultSuccessUrl("/?success")
+		.defaultSuccessUrl("/?success=true")
 		.usernameParameter("email")
 		.passwordParameter("password")
 		.and()

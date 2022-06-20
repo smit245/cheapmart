@@ -53,12 +53,12 @@ public class UserServiceImpl implements UserService{
 			throw new UsernameNotFoundException("Invalid Username Password");
 		}
 		Collection<String> c=new HashSet<String>();
-		c.add("User");
+		c.add("USER");
 		return new org.springframework.security.core.userdetails.User(user.getEmail(), user.getPassword(), myRolesToAuthorities(c));
 	}
 	
 	private Collection<? extends GrantedAuthority> myRolesToAuthorities(Collection<String> roles){
-		return roles.stream().map(role -> new SimpleGrantedAuthority("User")).collect(Collectors.toList());
+		return roles.stream().map(role -> new SimpleGrantedAuthority("USER")).collect(Collectors.toList());
 	}
 	
 	

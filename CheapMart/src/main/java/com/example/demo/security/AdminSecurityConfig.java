@@ -1,11 +1,14 @@
 package com.example.demo.security;
 
 
+import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.Primary;
 import org.springframework.core.annotation.Order;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 
 
@@ -15,10 +18,16 @@ import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 @Order(1)
 public class AdminSecurityConfig extends WebSecurityConfigurerAdapter{
 	
+	@Bean
+	@Primary
+	public static BCryptPasswordEncoder passwordEncoder() {
+		return new BCryptPasswordEncoder();
+	}
+	
 	@Override
 	public void configure(AuthenticationManagerBuilder auth) throws Exception {
 		auth.inMemoryAuthentication()
-			.withUser("admin@gmail.com").password("abcde").authorities("ADMIN");
+			.withUser("admin@gmail.com").password(passwordEncoder().encode("abcde")).authorities("ADMIN");
 	}
 	
 	@Override
@@ -32,7 +41,8 @@ public class AdminSecurityConfig extends WebSecurityConfigurerAdapter{
 				"/js/**",
 				"/css/**",
 				"/img/**",
-				"/registration"
+				"/registration",
+				"/login"
 				)
 		.permitAll()
 		.antMatchers("/admin/AdminHome",
