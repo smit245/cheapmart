@@ -9,6 +9,11 @@
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script> -->
   <!-- Load and execute javascript code used only in this page -->
   <script src="/admin/js/pages/readyDashboard.js"></script>
-  <script src="/admin/js/datatable.js"></script>
+  <script>
+		App.datatables();
+		$(document).ready(function() {
+			$('#myTable').DataTable();
+		});
+  </script>
 
  </div>

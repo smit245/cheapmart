@@ -42,6 +42,7 @@ public class UserSecurityConfig extends WebSecurityConfigurerAdapter{
 	@Override
 	protected void configure(HttpSecurity http) throws Exception{
 		http.authorizeRequests().antMatchers(
+				"/",
 				"/js/**",
 				"/css/**",
 				"/img/**",
@@ -57,18 +58,18 @@ public class UserSecurityConfig extends WebSecurityConfigurerAdapter{
 		.authenticated()
 		.and()
 		.formLogin()
-		.loginPage("/login")
-		.permitAll()
+		.loginPage("/")
 		.failureUrl("/?error=true")
 		.defaultSuccessUrl("/?success=true")
+		.permitAll()
 		.usernameParameter("email")
 		.passwordParameter("password")
 		.and()
 		.logout()
 		.logoutRequestMatcher(new AntPathRequestMatcher("/logout"))
-		.logoutSuccessUrl("/?loggedout")
 		.invalidateHttpSession(true)
 		.deleteCookies("JSESSIONID")
+		.logoutSuccessUrl("/?loggedout")
 		.and()
 		.exceptionHandling()
 		.and()

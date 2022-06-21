@@ -41,8 +41,7 @@ public class AdminSecurityConfig extends WebSecurityConfigurerAdapter{
 				"/js/**",
 				"/css/**",
 				"/img/**",
-				"/registration",
-				"/login"
+				"/registration"
 				)
 		.permitAll()
 		.antMatchers("/admin/AdminHome",
