@@ -3,7 +3,7 @@ package com.example.demo.security;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.core.annotation.Order;
+//import org.springframework.core.annotation.Order;
 import org.springframework.security.authentication.dao.DaoAuthenticationProvider;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
@@ -15,7 +15,7 @@ import com.example.demo.service.UserService;
 
 @SuppressWarnings("deprecation")
 @Configuration
-@Order(2)
+//@Order(1)
 public class UserSecurityConfig extends WebSecurityConfigurerAdapter{
 	
 	@Autowired
@@ -46,10 +46,13 @@ public class UserSecurityConfig extends WebSecurityConfigurerAdapter{
 				"/js/**",
 				"/css/**",
 				"/img/**",
-				"/registration"
+				"/registration",
+				"/admin/**",
+				
+				"/product"
 				)
 		.permitAll()
-		.antMatchers("/product",
+		.antMatchers("/bidding",
 				"/buy",
 				"/bid",
 				"/checkout")
@@ -76,7 +79,4 @@ public class UserSecurityConfig extends WebSecurityConfigurerAdapter{
 		.csrf()
 		.disable();
 	}
-	
-	 
-	
 }

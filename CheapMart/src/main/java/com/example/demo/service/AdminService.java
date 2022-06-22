@@ -8,13 +8,9 @@ import com.example.demo.model.User;
 
 public interface AdminService {
 	
-	Optional<Admin> getAdminByEmail(String email);
+	List<Admin> getAdminByEmail(String email);
 	
-	List<User> getAllUserInfo();
-	Optional<User> getUserByID(long id);
-	void delete(long id);
-	User getUserbyId(long id);
-	void saveUser(User user);
+	
 
 	/*
 	 * @Transactional

@@ -45,8 +45,28 @@
     </head>
     
     <body>
+    	<div class="col-sm-6 col-lg-3" >
+		    <!-- Danger Alert -->
+		    <div class="alert alert-danger alert-dismissable" th:if="${param.denied}">
+		        <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+		        <h4><strong>!!Denied!!</strong></h4>
+		        <p>Can't Access page without login</p>
+		    </div>
+		    <div class="alert alert-info alert-dismissable" th:if="${param.loggedout}">
+		        <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+		        <h4><strong>Logout..</strong></h4>
+		        <p>You have been successfully logged out</p>
+		    </div>
+		    <div class="alert alert-danger alert-dismissable" th:if="${param.error}">
+		        <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+		        <h4><strong>!!Wrong!!</strong></h4>
+		        <p>Maybe your Email and Password are Wrong!</p>
+		    </div>
+		    <!-- END Danger Alert -->
+		</div>
         <!-- Login Container -->
         <div id="login-container">
+	        
             <!-- Login Header -->
             <h1 class="h2 text-light text-center push-top-bottom animation-slideDown">
                 <i class="fa fa-cube"></i> <strong>Welcome to CheapMart</strong>
@@ -58,23 +78,23 @@
                 <!-- Login Title -->
                 <div class="block-title">
                     <div class="block-options pull-right">
-                        <a href="page_ready_reminder.html" class="btn btn-effect-ripple btn-primary" data-toggle="tooltip" data-placement="left" title="Forgot your password?"><i class="fa fa-exclamation-circle"></i></a>
-                        <a href="#" class="btn btn-effect-ripple btn-primary" data-toggle="tooltip" data-placement="left" title="Create new account"><i class="fa fa-plus"></i></a>
+                        <!-- <a href="page_ready_reminder.html" class="btn btn-effect-ripple btn-primary" data-toggle="tooltip" data-placement="left" title="Forgot your password?"><i class="fa fa-exclamation-circle"></i></a>
+                        <a href="#" class="btn btn-effect-ripple btn-primary" data-toggle="tooltip" data-placement="left" title="Create new account"><i class="fa fa-plus"></i></a> -->
                     </div>
                     <h2>Admin Login</h2>
                 </div>
                 <!-- END Login Title -->
 
                 <!-- Login Form -->
-                <form id="form-login" method="post" class="form-horizontal">
+                <form id="form-login" method="post" class="form-horizontal" th:object="${AdminLogin}">
                     <div class="form-group">
                         <div class="col-xs-12">
-                            <input type="text" id="login-email"  name="username" class="form-control" placeholder="Your email..">
+                            <input type="text" id="login-email"  name="username" th:field="*{email}" class="form-control" placeholder="Your email..">
                         </div>
                     </div>
                     <div class="form-group">
                         <div class="col-xs-12">
-                            <input type="password" id="login-password"  name="password" class="form-control" placeholder="Your password..">
+                            <input type="password" id="login-password"  name="password" th:field="*{password}" class="form-control" placeholder="Your password..">
                         </div>
                     </div>
                     <div class="form-group form-actions">

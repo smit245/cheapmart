@@ -2,6 +2,8 @@ package com.example.demo.service;
 
 import java.util.Collection;
 import java.util.HashSet;
+import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -61,6 +63,40 @@ public class UserServiceImpl implements UserService{
 		return roles.stream().map(role -> new SimpleGrantedAuthority("USER")).collect(Collectors.toList());
 	}
 	
+	@Override
+	public List<User> getAllUserInfo() {
+		return userRepository.findAll();
+	}
+	
+	@Override
+	public Optional<User> getUserByID(long id) {
+		
+		return userRepository.findById(id);
+	}
+	
+	public void delete(long id) {
+        userRepository.deleteById(id);
+    }
+	
+	@Override
+	public User getUserbyId(long id) {
+		Optional<User> optional = userRepository.findById(id);
+		User user = null;
+		if(optional.isPresent())
+		{
+			user = optional.get();
+		}
+		else
+		{
+			throw new RuntimeException("User not found - > "+id);
+		}
+		return user;
+	}
+	
+	@Override
+	public void saveUser(User user) {
+		this.userRepository.save(user);
+	}
 	
 
 }
