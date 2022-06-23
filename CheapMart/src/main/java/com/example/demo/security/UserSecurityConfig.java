@@ -48,14 +48,15 @@ public class UserSecurityConfig extends WebSecurityConfigurerAdapter{
 				"/img/**",
 				"/registration",
 				"/admin/**",
-				
-				"/product"
-				)
+				"/about",
+				"/product",
+				"/contact")
 		.permitAll()
 		.antMatchers("/bidding",
 				"/buy",
 				"/bid",
-				"/checkout")
+				"/checkout",
+				"addproduct")
 		.hasAuthority("USER")
 		.anyRequest()
 		.authenticated()

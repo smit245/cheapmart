@@ -1,9 +1,10 @@
 package com.example.demo.web;
 
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
+
 
 import com.example.demo.web.dto.UserRegistrationDto;
 
@@ -15,18 +16,22 @@ public class AppController {
 	public UserRegistrationDto userRegistrationDto() {
 		return new UserRegistrationDto();
 	}
+	
 	@GetMapping("/")
-	public String viewHomePage() {
+	public String viewHomePage(Model model) {
+		model.addAttribute("title", "Home");
 		return "index";
 	}
 	
 	@GetMapping("/about")
-	public String viewAboutPage() {
-		return "about";
+	public String viewAboutPage(Model model) {
+		model.addAttribute("title", "About Us");
+		return "about"; 
 	}
 	
 	@GetMapping("/contact")
-	public String viewContactPage() {
+	public String viewContactPage(Model model) {
+		model.addAttribute("title", "Contact Us");
 		return "contact";
 	}
 }
