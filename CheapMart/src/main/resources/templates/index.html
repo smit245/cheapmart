@@ -465,14 +465,12 @@
 	</main>
 	<!-- /main -->	
 		
-		<footer class="revealed" th:include="layouts/Footer :: Footer">
-		</footer>
+		<footer class="revealed" th:include="layouts/Footer :: Footer"></footer>
 	</div>
 	<div id="toTop"></div><!-- Back to top button -->
-	<div th:include="layouts/Script :: Scripts">
-	</div>
+	<div th:include="layouts/Script :: Scripts"></div>
 	<!-- SPECIFIC SCRIPTS -->
-	<script src="js/modernizr.js"></script>
+	
 	<script src="js/video_header.min.js"></script>
 	<script>
 		// Video Header
@@ -483,17 +481,6 @@
 			autoPlayVideo: true
 		});
 	</script>
-	<script src="js/isotope.min.js"></script>
-	<script>
-		// Isotope filter
-		$(window).on('load',function(){
-		  var $container = $('.isotope-wrapper');
-		  $container.isotope({ itemSelector: '.isotope-item', layoutMode: 'masonry' });
-		});
-		$('.isotope_filter').on( 'click', 'a', 'change', function(){
-		  var selector = $(this).attr('data-filter');
-		  $('.isotope-wrapper').isotope({ filter: selector });
-		});
-	</script>
+	
 </body>
 </html>

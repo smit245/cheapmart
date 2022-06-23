@@ -19,4 +19,14 @@ public class AppController {
 	public String viewHomePage() {
 		return "index";
 	}
+	
+	@GetMapping("/about")
+	public String viewAboutPage() {
+		return "about";
+	}
+	
+	@GetMapping("/contact")
+	public String viewContactPage() {
+		return "contact";
+	}
 }
