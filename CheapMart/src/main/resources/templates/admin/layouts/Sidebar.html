@@ -15,20 +15,23 @@
             <!-- Sidebar Navigation -->
             <ul class="sidebar-nav">
                 <li>
-                    <a href="/admin/AdminHome" th:classappend="${#httpServletRequest.getRequestURI() == '/AdminHome' ? 'active':''}"><i class="gi gi-compass sidebar-nav-icon"></i><span class="sidebar-nav-mini-hide">Dashboard</span></a>
+                    <a href="/admin/AdminHome" th:classappend="${#httpServletRequest.getRequestURI() == '/admin/AdminHome' ? 'active':''}"><i class="gi gi-compass sidebar-nav-icon"></i><span class="sidebar-nav-mini-hide">Dashboard</span></a>
                 </li>
 
                 <li class="sidebar-separator">
                     <i class="fa fa-ellipsis-h"></i>
                 </li>
                 <li>
-                    <a href="/admin/AdminUser" th:classappend="${#httpServletRequest.getRequestURI() == '/AdminUser' ? 'active':''}"><i  class="fa fa-user sidebar-nav-icon"></i><span class="sidebar-nav-mini-hide">Users</span></a>
+                    <a href="/admin/AdminUser" th:classappend="${#httpServletRequest.getRequestURI() == '/admin/AdminUser' ? 'active':''}"><i  class="fa fa-user sidebar-nav-icon"></i><span class="sidebar-nav-mini-hide">Users</span></a>
                 </li>
                 <li>
-                    <a href="/admin/AdminProduct" th:classappend="${#httpServletRequest.getRequestURI() == '/AdminProduct' ? 'active':''}"><i class="fa fa-table sidebar-nav-icon"></i><span class="sidebar-nav-mini-hide">Products</span></a>
+                    <a href="/admin/AdminProduct" th:classappend="${#httpServletRequest.getRequestURI() == '/admin/AdminProduct' ? 'active':''}"><i class="fa fa-shopping-cart sidebar-nav-icon"></i><span class="sidebar-nav-mini-hide">Products</span></a>
                 </li>
                 <li>
-                    <a href="/admin/AdminOrders" th:classappend="${#httpServletRequest.getRequestURI() == '/AdminOrders' ? 'active':''}"><i class="fa fa-money sidebar-nav-icon"></i><span class="sidebar-nav-mini-hide">Orders</span></a>
+                    <a href="/admin/AdminOrders" th:classappend="${#httpServletRequest.getRequestURI() == '/admin/AdminOrders' ? 'active':''}"><i class="fa fa-money sidebar-nav-icon"></i><span class="sidebar-nav-mini-hide">Orders</span></a>
+                </li>
+                 <li>
+                    <a href="/admin/AdminCategory" th:classappend="${#httpServletRequest.getRequestURI() == '/admin/AdminCategory' ? 'active':''}"><i class="fa fa-th sidebar-nav-icon"></i><span class="sidebar-nav-mini-hide">Categories</span></a>
                 </li>
                 
             </ul>

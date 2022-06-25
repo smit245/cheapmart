@@ -19,7 +19,7 @@ public class Category {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 	
-	@OneToMany(mappedBy = "category",fetch=FetchType.LAZY)
+	@OneToMany(mappedBy = "category",fetch=FetchType.EAGER)
 	private Set<SubCategory> subcategory= new HashSet<>();
 	
 	@Column(nullable = false,length=100)
@@ -27,6 +27,9 @@ public class Category {
 	
 	@Column(nullable = false,length=100)
 	private String image;
+	
+	@Column(nullable = false,columnDefinition = "integer default 0")
+	private int status;
 	
 	public Set<SubCategory> getSubcategory() {
 		return subcategory;
@@ -64,6 +67,5 @@ public class Category {
 		return id;
 	}
 
-	@Column(nullable = false,columnDefinition = "integer default 0")
-	private int status;
+	
 }

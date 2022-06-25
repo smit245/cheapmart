@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<!--[if IE 9]>         <html class="no-js lt-ie10" lang="en"> <![endif]-->
+<!--[if gt IE 9]><!--> 
+<html class="no-js" lang="en"
+xmlns="http://www.w3.org/1999/xhtml"
+    xmlns:th="http://www.thymeleaf.org"
+    xmlns:sec="http://www.thymeleaf.org"> <!--<![endif]-->
+    <head th:replace="admin/layouts/Head ::Head"></head>
+    <body>
+
+        <div id="page-wrapper" class="page-loading">
+
+            <div id="page-container" class="header-fixed-top sidebar-visible-lg-full">
+
+               <div th:replace="admin/layouts/Sidebar :: Sidebar"></div>
+
+                 <!-- Main Container -->
+                <div id="main-container">
+
+                    <header th:replace="admin/layouts/Header :: Header"></header>
+
+                    <!-- Page content -->
+                    <div id="page-content">
+	                    <div class="block full">
+	                            <div class="block-title">
+	                            	<button type="button" data-toggle="modal" data-target="#modal-add-category" class="btn btn-effect-ripple btn-primary pull-right" style="overflow: hidden; position: relative;"><span class="btn-ripple animate" style="height: 129px; width: 129px; top: -43.5px; left: -20.9844px;"></span><i class="fa fa-plus"></i> Add Category</button>
+	                                <h2>Categories</h2>
+	                            </div>
+	                            
+	                        <!-- First Row -->
+	                        <div class="row">
+	                        	<div class="table-responsive">
+									<table id="myTable" class="table table-striped table-bordered"
+										style="width: 100%">
+										<thead>
+											<tr>
+												<th>ID</th>
+												<th>Name</th>
+												<th>Image</th>
+												<th>Status</th>
+												<th >Action</th>
+												
+											</tr>
+										</thead>
+											
+										<tbody >
+											<!-- <tr th:if="${user.empty}">
+												<td colspan="2">No User Available</td>
+											</tr> -->
+											<tr th:each="category : ${Categories}">
+												<td><span th:text="${category.id}"></span></td>
+												<td><span th:text="${category.name}"> </span></td>
+												<td><img th:src="'/admin/img/category/'+${category.image}"></td>
+												<td><span class="label" th:classappend="${label.get(category.status).get('class')}" th:text="${label.get(category.status).get('text')}"></span></td>
+												<td>
+													<a href="javascript:void(0)" title="Information" class="btn btn-effect-ripple btn-xs btn-info info" id="info" th:attr="data-id=${category.id}"><i class="fa fa-info"></i></a>
+                            						<a href="javascript:void(0)" title="Edit" class="btn btn-effect-ripple btn-xs btn-success edit" id="edit" th:attr="data-id=${category.id}"><i class="fa fa-pencil"></i></a>
+												</td>
+											</tr>
+										</tbody>
+										
+									</table>
+								</div>
+							</div>
+							 <!-- END First Row -->
+						</div>
+						<!-- Add Modal Start-->
+					    <div id="modal-add-category" class="modal fade" tabindex="-1" role="dialog" aria-hidden="true">
+					        <div class="modal-dialog">
+					            <div class="modal-content">
+					                <div class="modal-header">
+					                <button type="button" class="btn btn-effect-ripple btn-primary pull-right" data-dismiss="modal"><i class="fa fa-times"></i><i class="fa-solid fa-xmark"></i></button>
+					                    <h3 class="modal-title text-center"><strong>Add Category</strong></h3>
+					                </div>
+					                <div class="modal-body">
+					
+					                <form id="add-category" action="/admin/addcategory" method="post" enctype="multipart/form-data" th:object="${categoryForm}" class="form-horizontal form-bordered">
+					                    <div class="form-group">
+					                        <label class="col-md-3 control-label" for="name">Name <span class="text-danger">*</span></label>
+					                        <div class="col-md-6">
+					                            <input type="text" id="name" name="name" th:field="*{name}" class="form-control" placeholder="Enter the Name Of Owner..">
+					                        </div>
+					                    </div>
+					                    <div class="form-group">
+					                        <label class="col-md-3 control-label" for="img">Image <span class="text-danger">*</span></label>
+					                        <div class="col-md-9">
+					                            <input type="file" id="img" name="img" accept="image/*">
+					                            <img src="#" id="dimg" width="200" th:hidden="hidden">
+					                        </div>
+					                    </div>
+					
+					                    <div class="form-group form-actions">
+					                        <div class="col-md-8 col-md-offset-3">
+					                            <button type="submit" class="btn btn-effect-ripple btn-primary">Submit</button>
+					                            <button type="reset" class="btn btn-effect-ripple btn-danger">Reset</button>
+					                        </div>
+					                    </div>
+					                </form>
+					
+					
+					            </div>
+					                <div class="modal-footer">
+					
+					                </div>
+					            </div>
+					        </div>
+					    </div>
+					    <!-- Add Modal End-->
+                    </div>
+                    <!-- END Page Content -->
+                </div>
+                <!-- END Main Container -->
+            </div>
+            <!-- END Page Container -->
+        </div>
+        <!-- END Page Wrapper -->
+
+
+
+       <div th:replace="admin/layouts/Scripts :: Scripts"></div>
+
+		<script src="/admin/js/pages/manageCategory.js"></script>
+        <script> 
+        $(document).ready( function () {
+            $('#myTable').DataTable();
+        } );
+        </script>
+    </body>
+</html>

@@ -1,6 +1,6 @@
-package com.example.demo.formhandling;
+package com.example.demo.web.dto;
 
-public class AdminLogin {
+public class AdminLoginDto {
 	private String email;
 	private String password;
 	public String getEmail() {

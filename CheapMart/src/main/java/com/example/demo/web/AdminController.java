@@ -1,8 +1,11 @@
 package com.example.demo.web;
 
 
+import java.io.IOException;
+import java.nio.file.Paths;
+import java.util.HashMap;
 import java.util.List;
-
+import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -11,17 +14,22 @@ import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 //import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.multipart.MultipartFile;
 
+import com.example.demo.filehandle.FileUploadUtil;
 import com.example.demo.model.Admin;
 import com.example.demo.model.User;
 import com.example.demo.service.AdminService;
+import com.example.demo.service.CategoryService;
 import com.example.demo.service.UserService;
-import com.example.demo.formhandling.AdminLogin;
+import com.example.demo.web.dto.AdminLoginDto;
+import com.example.demo.web.dto.CategoryFormDto;
 
 @Controller
 public class AdminController {
@@ -30,12 +38,15 @@ public class AdminController {
 	private UserService userService;
 	
 	@Autowired
+	private CategoryService categoryService;
+	
+	@Autowired
 	private AdminService adminService;
 	
 	
 	@ModelAttribute("AdminLogin")
-	public AdminLogin adminLogin() {
-		return new AdminLogin();
+	public AdminLoginDto adminLoginDto() {
+		return new AdminLoginDto();
 	}
  	
 //	private boolean isAuthenticated() {
@@ -66,12 +77,12 @@ public class AdminController {
 	}
 	
 	@PostMapping("/admin/login")
-	public String AdminLoginAuth(@ModelAttribute("AdminLogin") AdminLogin adminLogin,HttpServletRequest request) {
-		List<Admin> admin=adminService.getAdminByEmail(adminLogin.getEmail());
+	public String AdminLoginAuth(@ModelAttribute("AdminLogin") AdminLoginDto adminLoginDto,HttpServletRequest request) {
+		List<Admin> admin=adminService.getAdminByEmail(adminLoginDto.getEmail());
 		
 		for(int i=0; i<admin.size();i++) {
-			if(admin.get(i).getEmail().equalsIgnoreCase(adminLogin.getEmail())) {
-				if(admin.get(i).getPassword().equals(adminLogin.getPassword())) {
+			if(admin.get(i).getEmail().equalsIgnoreCase(adminLoginDto.getEmail())) {
+				if(admin.get(i).getPassword().equals(adminLoginDto.getPassword())) {
 					HttpSession session=request.getSession();
 					session.setAttribute("Admin", true);
 					return "redirect:/admin/AdminHome";
@@ -123,6 +134,38 @@ public class AdminController {
 		return "redirect:/admin/login?denied=true";
 	}
 	
+	@GetMapping("/admin/AdminCategory")
+	public String AdminCategories(@ModelAttribute("categoryForm") CategoryFormDto categoryFormDto ,Model model,HttpServletRequest request) {
+		if(isAuthenticated(request)) {
+			//making label Map
+			Map<Integer,Map<String,String>> label= new HashMap<Integer,Map<String,String>>();
+			Map<String, String> map = new HashMap<String, String>();
+			map.put("class","label-success");
+			map.put("text", "Active");
+			label.put(0, map);
+			map = new HashMap<String, String>();
+			map.put("class","label-danger");
+			map.put("text", "Inative");
+			label.put(1, map);
+			model.addAttribute("label", label);
+			model.addAttribute("title", "Categories");
+			model.addAttribute("Categories", categoryService.getAllCategories());
+			return "admin/AdminCategory";
+		}
+		return "redirect:/admin/login?denied=true";
+	}
+	
+	@PostMapping("/admin/addcategory")
+	public String addCatgeory(@ModelAttribute("categoryForm") CategoryFormDto categoryFormDto,@RequestParam("img") MultipartFile multipartFile) throws IOException {
+		
+		String image = String.valueOf(System.currentTimeMillis())+StringUtils.cleanPath(multipartFile.getOriginalFilename());
+		categoryFormDto.setImage(image);
+		categoryService.save(categoryFormDto);
+		String uploadDir=Paths.get("src/main/resources/static/admin/img/category/").toAbsolutePath().toString();
+		FileUploadUtil.saveFile(uploadDir, image, multipartFile);
+		return "redirect:/admin/AdminCategory";
+		
+	}
 	@GetMapping("/admin/BlockOrUnblock")
 	public String AdminBlockUser(@RequestParam long userId , Model model,HttpServletRequest request) 
 	{

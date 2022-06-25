@@ -52,11 +52,11 @@
 	<!-- /Sign In Modal -->
 	
 	<!-- Sign In Modal -->
-	<div id="sign-up-dialog" class="zoom-anim-dialog mfp-hide" th:object="${user}" th:fragment="Signup">
+	<div id="sign-up-dialog" class="zoom-anim-dialog mfp-hide"  th:fragment="Signup">
 		<div class="modal_header">
 			<h3>Sign up</h3>
 		</div>
-		<form method="post" th:action="@{/registration}" id="registration">
+		<form method="post" th:action="@{/registration}" th:object="${user}" id="registration">
 			<div class="sign-in-wrapper">
 				<div class="form-group">
 					<label>Name</label>
