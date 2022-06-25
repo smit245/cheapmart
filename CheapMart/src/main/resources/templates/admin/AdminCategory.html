@@ -7,6 +7,7 @@ xmlns="http://www.w3.org/1999/xhtml"
     xmlns:sec="http://www.thymeleaf.org"> <!--<![endif]-->
     <head th:replace="admin/layouts/Head ::Head"></head>
     <body>
+	   
 
         <div id="page-wrapper" class="page-loading">
 
@@ -21,14 +22,28 @@ xmlns="http://www.w3.org/1999/xhtml"
 
                     <!-- Page content -->
                     <div id="page-content">
+                    
 	                    <div class="block full">
-	                            <div class="block-title">
-	                            	<button type="button" data-toggle="modal" data-target="#modal-add-category" class="btn btn-effect-ripple btn-primary pull-right" style="overflow: hidden; position: relative;"><span class="btn-ripple animate" style="height: 129px; width: 129px; top: -43.5px; left: -20.9844px;"></span><i class="fa fa-plus"></i> Add Category</button>
-	                                <h2>Categories</h2>
-	                            </div>
+	                     	
+	                    	
+                            <div class="block-title">
+                            	<button type="button" data-toggle="modal" data-target="#modal-add-category" class="btn btn-effect-ripple btn-primary pull-right" style="overflow: hidden; position: relative;"><span class="btn-ripple animate" style="height: 129px; width: 129px; top: -43.5px; left: -20.9844px;"></span><i class="fa fa-plus"></i> Add Category</button>
+                                <h2>Categories</h2>
+                            </div>
 	                            
 	                        <!-- First Row -->
 	                        <div class="row">
+	                        	<!-- Error Success Grawls -->
+							    <div class="alert alert-danger alert-dismissable" th:if="${error}">
+							        <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+							        <h4><strong>!!Error!!</strong></h4>
+							        <p th:text="${error}"></p>
+							    </div>
+							    <div class="alert alert-success alert-dismissable" th:if="${success}">
+							        <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+							        <h4><strong>Success...</strong></h4>
+							        <p th:text="${success}"></p>
+							    </div>
 	                        	<div class="table-responsive">
 									<table id="myTable" class="table table-striped table-bordered"
 										style="width: 100%">
@@ -43,17 +58,13 @@ xmlns="http://www.w3.org/1999/xhtml"
 											</tr>
 										</thead>
 											
-										<tbody >
-											<!-- <tr th:if="${user.empty}">
-												<td colspan="2">No User Available</td>
-											</tr> -->
+										<tbody>
 											<tr th:each="category : ${Categories}">
 												<td><span th:text="${category.id}"></span></td>
 												<td><span th:text="${category.name}"> </span></td>
-												<td><img th:src="'/admin/img/category/'+${category.image}"></td>
+												<td><img th:src="'/admin/img/category/'+${category.image}" width="200"></td>
 												<td><span class="label" th:classappend="${label.get(category.status).get('class')}" th:text="${label.get(category.status).get('text')}"></span></td>
 												<td>
-													<a href="javascript:void(0)" title="Information" class="btn btn-effect-ripple btn-xs btn-info info" id="info" th:attr="data-id=${category.id}"><i class="fa fa-info"></i></a>
                             						<a href="javascript:void(0)" title="Edit" class="btn btn-effect-ripple btn-xs btn-success edit" id="edit" th:attr="data-id=${category.id}"><i class="fa fa-pencil"></i></a>
 												</td>
 											</tr>
@@ -84,7 +95,7 @@ xmlns="http://www.w3.org/1999/xhtml"
 					                    <div class="form-group">
 					                        <label class="col-md-3 control-label" for="img">Image <span class="text-danger">*</span></label>
 					                        <div class="col-md-9">
-					                            <input type="file" id="img" name="img" accept="image/*">
+					                            <input type="file" id="img" name="img" accept="image/*" class="form-control">
 					                            <img src="#" id="dimg" width="200" th:hidden="hidden">
 					                        </div>
 					                    </div>
@@ -106,6 +117,61 @@ xmlns="http://www.w3.org/1999/xhtml"
 					        </div>
 					    </div>
 					    <!-- Add Modal End-->
+					    <!-- Edit Modal Start-->
+					    <div id="modal-edit-category" class="modal fade" tabindex="-1" role="dialog" aria-hidden="true">
+					        <div class="modal-dialog">
+					            <div class="modal-content">
+					                <div class="modal-header">
+					                <button type="button" class="btn btn-effect-ripple btn-primary pull-right" data-dismiss="modal"><i class="fa fa-times"></i><i class="fa-solid fa-xmark"></i></button>
+					                    <h3 class="modal-title text-center"><strong>Edit Category</strong></h3>
+					                </div>
+					                <div class="modal-body">
+					
+					                <form id="edit-category" method="post" action="/admin/updatecategory" enctype="multipart/form-data" th:object="${categoryForm}" class="form-horizontal form-bordered">
+					                	<input type="hidden" name="id" th:field="*{id}" id="edit-categoryid">
+					                     <div class="form-group">
+					                        <label class="col-md-3 control-label" for="name">Name <span class="text-danger">*</span></label>
+					                        <div class="col-md-6">
+					                            <input type="text" id="editname" name="name" th:field="*{name}" class="form-control" placeholder="Enter the Name Of Owner..">
+					                        </div>
+					                    </div>
+					                    <div class="form-group">
+					                        <label class="col-md-3 control-label" for="img">Image <span class="text-danger">*</span></label>
+					                        <div class="col-md-9">
+					                            <input type="file" id="editimg" name="img" accept="image/*" class="form-control">
+					                            <img src="#" id="editdimg" width="200" th:hidden="hidden">
+					                        </div>
+					                    </div>
+					
+										<div class="form-group">
+										 	<label class="col-md-3 control-label" for="status">Status</label>
+										 	<div class="col-md-6">
+										 		<select name="status" id="editstatus" th:field="*{status}" class="form-control">
+										 			<option value="0">Active</option>
+										 			<option Value="1">Inactive</option>
+										 		</select>
+										 	</div>
+										</div>
+					                    <div class="form-group form-actions">
+					                        <div class="col-md-8 col-md-offset-3">
+					                            <button type="submit" class="btn btn-effect-ripple btn-primary">Submit</button>
+					                            <button type="reset" class="btn btn-effect-ripple btn-danger">Reset</button>
+					                        </div>
+					                    </div>
+					                </form>
+					              
+					
+					
+					            </div>
+					                <div class="modal-footer">
+					
+					                </div>
+					            </div>
+					        </div>
+					    </div>
+					    <!-- Edit Modal End-->
+					    
+					    
                     </div>
                     <!-- END Page Content -->
                 </div>

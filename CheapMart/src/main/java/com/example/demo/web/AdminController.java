@@ -6,6 +6,7 @@ import java.nio.file.Paths;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -18,12 +19,15 @@ import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
-//import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
+import org.springframework.web.servlet.support.RequestContextUtils;
 
 import com.example.demo.filehandle.FileUploadUtil;
 import com.example.demo.model.Admin;
+import com.example.demo.model.Category;
 import com.example.demo.model.User;
 import com.example.demo.service.AdminService;
 import com.example.demo.service.CategoryService;
@@ -147,6 +151,11 @@ public class AdminController {
 			map.put("class","label-danger");
 			map.put("text", "Inative");
 			label.put(1, map);
+			Map<String, ?>  inputFlashMap= RequestContextUtils.getInputFlashMap(request);
+			if(inputFlashMap != null){
+				Set<String> key=inputFlashMap.keySet();
+				model.addAttribute(key.toString(), (String)inputFlashMap.get(key.toString()));
+			}
 			model.addAttribute("label", label);
 			model.addAttribute("title", "Categories");
 			model.addAttribute("Categories", categoryService.getAllCategories());
@@ -156,13 +165,39 @@ public class AdminController {
 	}
 	
 	@PostMapping("/admin/addcategory")
-	public String addCatgeory(@ModelAttribute("categoryForm") CategoryFormDto categoryFormDto,@RequestParam("img") MultipartFile multipartFile) throws IOException {
+	public String addCatgeory(@ModelAttribute("categoryForm") CategoryFormDto categoryFormDto,@RequestParam("img") MultipartFile multipartFile,HttpServletRequest request,Model model) throws IOException {
 		
 		String image = String.valueOf(System.currentTimeMillis())+StringUtils.cleanPath(multipartFile.getOriginalFilename());
 		categoryFormDto.setImage(image);
 		categoryService.save(categoryFormDto);
 		String uploadDir=Paths.get("src/main/resources/static/admin/img/category/").toAbsolutePath().toString();
 		FileUploadUtil.saveFile(uploadDir, image, multipartFile);
+		return "redirect:/admin/AdminCategory";
+		
+	}
+	
+	@GetMapping("/admin/editcategory")
+	@ResponseBody
+	public Category editCategory(@RequestParam("id") long categoryId) {
+		Category category=categoryService.getCategoryById(categoryId);
+		return category;
+	}
+	
+	@PostMapping("/admin/updatecategory")
+	public String updateCategory(@ModelAttribute("categoryForm") CategoryFormDto categoryFormDto,@RequestParam(value="img", required=false) MultipartFile multipartFile,RedirectAttributes redirectAttributes) throws IOException{
+		Category category=categoryService.getCategoryById(categoryFormDto.getId());
+		category.setName(categoryFormDto.getName());
+		category.setStatus(categoryFormDto.getStatus());
+		if(categoryService.updateCategory(category)) {
+			redirectAttributes.addFlashAttribute("success", "Category Successfully Updated");
+			if(multipartFile.getSize()>0) {
+				String image=category.getImage();
+				String uploadDir=Paths.get("src/main/resources/static/admin/img/category/").toAbsolutePath().toString();
+				FileUploadUtil.saveFile(uploadDir, image, multipartFile);
+			}
+		}else {
+			redirectAttributes.addFlashAttribute("error", "Category Not Updated.");
+		}
 		return "redirect:/admin/AdminCategory";
 		
 	}
@@ -185,6 +220,7 @@ public class AdminController {
 		}
 		return "redirect:/admin/login?denied=true";
 	}
+	
 	
 	@GetMapping("/admin/logout")
 	public String AdminLogout(HttpServletRequest request) {

@@ -8,6 +8,7 @@ import com.example.demo.web.dto.CategoryFormDto;
 
 public interface CategoryService {
 	List<Category> getAllCategories();
-
+	Category getCategoryById(long categoryId);
 	Category save(CategoryFormDto categoryFormDato);
+	boolean updateCategory(Category category);
 }

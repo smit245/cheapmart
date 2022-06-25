@@ -1,19 +1,19 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <section name="Workbench">
 	<section name="org.eclipse.ui.texteditor.FindReplaceDialog">
-		<item key="selection" value="AdminHome"/>
+		<item key="selection" value="BOOTSTRAP"/>
 		<item key="casesensitive" value="false"/>
 		<item key="wholeword" value="false"/>
 		<item key="isRegEx" value="false"/>
 		<list key="findhistory">
+			<item value="alert"/>
+			<item value="bootstrap"/>
+			<item value="Jackson"/>
 			<item value="AdminHome"/>
 			<item value="admin/"/>
 			<item value="admin"/>
 			<item value="&#x09;&#x09;.logoutSuccessUrl(&quot;/login?loggedout&quot;)"/>
 			<item value="has-"/>
-			<item value="sign-in"/>
-			<item value="src"/>
-			<item value="replace"/>
 		</list>
 		<list key="replacehistory">
 		</list>

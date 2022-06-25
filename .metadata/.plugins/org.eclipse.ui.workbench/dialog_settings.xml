@@ -6,4 +6,9 @@
 			<item value="org.eclipse.wst.web.ui"/>
 		</list>
 	</section>
+	<section name="EditorSelectionDialog">
+		<item key="EditorSelectionDialog.STORE_ID_FILE_EXTENSION" value=".jfif"/>
+		<item key="EditorSelectionDialog.STORE_ID_INTERNAL_EXTERNAL" value="true"/>
+		<item key="EditorSelectionDialog.STORE_ID_DESCR" value="Disc Image File"/>
+	</section>
 </section>
