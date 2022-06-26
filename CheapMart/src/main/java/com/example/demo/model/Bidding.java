@@ -14,17 +14,13 @@ import javax.persistence.JoinColumns;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+
 @Entity
 @Table(name="bidding")
 public class Bidding {
 	
-	public Long getId() {
-		return id;
-	}
-
-	public void setId(Long id) {
-		this.id = id;
-	}
+	
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -33,11 +29,13 @@ public class Bidding {
 	@ManyToOne
 	@JoinColumns(foreignKey = @ForeignKey(name="FK_bidding_product"),value= {
 			@JoinColumn(referencedColumnName = "id",name="pid",nullable=false)})
+	@JsonBackReference
 	private Product product;
 	
 	@ManyToOne
 	@JoinColumns(foreignKey = @ForeignKey(name="FK_bidding_user"),value= {
 			@JoinColumn(referencedColumnName = "id",name="uid",nullable=false)})
+	@JsonBackReference
 	private User user;
 	
 	@Column(nullable = false)
@@ -45,6 +43,14 @@ public class Bidding {
 	
 	@Column(nullable = false,columnDefinition = "integer default 0")
 	private int status;
+	
+	public Long getId() {
+		return id;
+	}
+
+	public void setId(Long id) {
+		this.id = id;
+	}
 	
 	public Product getProduct() {
 		return product;

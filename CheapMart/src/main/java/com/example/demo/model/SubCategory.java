@@ -14,6 +14,9 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonIdentityReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+
 @Entity
 @Table(name="subcategory")
 public class SubCategory {
@@ -22,17 +25,17 @@ public class SubCategory {
 	private Long id;
 	
 	@ManyToOne
-	@JoinColumn(name = "cid",nullable=false)
+	@JoinColumn(name = "cid",nullable=false,referencedColumnName = "id")
+	@JsonIdentityReference(alwaysAsId = true)
 	private Category category;
 	
 	@OneToMany(mappedBy = "subcategory",fetch=FetchType.LAZY)
+	@JsonManagedReference
 	private Set<Product> product= new HashSet<>();
 	
 	@Column(nullable = false,length=100)
 	private String name;
 	
-	@Column(nullable = false,length=100)
-	private String image;
 	
 	@Column(nullable = false,columnDefinition = "integer default 0")
 	private int status;
@@ -65,14 +68,6 @@ public class SubCategory {
 		this.name = name;
 	}
 
-	public String getImage() {
-		return image;
-	}
-
-	public void setImage(String image) {
-		this.image = image;
-	}
-
 	public int getStatus() {
 		return status;
 	}
@@ -84,7 +79,5 @@ public class SubCategory {
 	public void setId(Long id) {
 		this.id = id;
 	}
-
-	
 	
 }

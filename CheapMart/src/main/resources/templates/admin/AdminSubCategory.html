@@ -27,8 +27,8 @@ xmlns="http://www.w3.org/1999/xhtml"
 	                     	
 	                    	
                             <div class="block-title">
-                            	<button type="button" data-toggle="modal" data-target="#modal-add-category" class="btn btn-effect-ripple btn-primary pull-right" style="overflow: hidden; position: relative;"><span class="btn-ripple animate" style="height: 129px; width: 129px; top: -43.5px; left: -20.9844px;"></span><i class="fa fa-plus"></i> Add Category</button>
-                                <h2>Categories</h2>
+                            	<button type="button" data-toggle="modal" data-target="#modal-add-subcategory" class="btn btn-effect-ripple btn-primary pull-right" style="overflow: hidden; position: relative;"><span class="btn-ripple animate" style="height: 129px; width: 129px; top: -43.5px; left: -20.9844px;"></span><i class="fa fa-plus"></i> Add Sub-category</button>
+                                <h2>Sub-categories</h2>
                             </div>
 	                            
 	                        <!-- First Row -->
@@ -51,7 +51,7 @@ xmlns="http://www.w3.org/1999/xhtml"
 											<tr>
 												<th>ID</th>
 												<th>Name</th>
-												<th>Image</th>
+												<th>Category</th>
 												<th>Status</th>
 												<th >Action</th>
 												
@@ -59,13 +59,13 @@ xmlns="http://www.w3.org/1999/xhtml"
 										</thead>
 											
 										<tbody>
-											<tr th:each="category : ${Categories}">
-												<td><span th:text="${category.id}"></span></td>
-												<td><span th:text="${category.name}"> </span></td>
-												<td><img th:src="'/admin/img/category/'+${category.image}" width="200"></td>
-												<td><span class="label" th:classappend="${label.get(category.status).get('class')}" th:text="${label.get(category.status).get('text')}"></span></td>
+											<tr th:each="subCategory : ${SubCategories}">
+												<td><span th:text="${subCategory.id}"></span></td>
+												<td><span th:text="${subCategory.name}"> </span></td>
+												<td><span th:text="${subCategory.category.name}"> </span></td>
+												<td><span class="label" th:classappend="${label.get(subCategory.status).get('class')}" th:text="${label.get(subCategory.status).get('text')}"></span></td>
 												<td>
-                            						<a href="javascript:void(0)" title="Edit" class="btn btn-effect-ripple btn-xs btn-success edit" id="edit" th:attr="data-id=${category.id}"><i class="fa fa-pencil"></i></a>
+                            						<a href="javascript:void(0)" title="Edit" class="btn btn-effect-ripple btn-xs btn-success edit" id="edit" th:attr="data-id=${subCategory.id}"><i class="fa fa-pencil"></i></a>
 												</td>
 											</tr>
 										</tbody>
@@ -76,27 +76,28 @@ xmlns="http://www.w3.org/1999/xhtml"
 							 <!-- END First Row -->
 						</div>
 						<!-- Add Modal Start-->
-					    <div id="modal-add-category" class="modal fade" tabindex="-1" role="dialog" aria-hidden="true">
+					    <div id="modal-add-subcategory" class="modal fade" tabindex="-1" role="dialog" aria-hidden="true">
 					        <div class="modal-dialog">
 					            <div class="modal-content">
 					                <div class="modal-header">
 					                <button type="button" class="btn btn-effect-ripple btn-primary pull-right" data-dismiss="modal"><i class="fa fa-times"></i><i class="fa-solid fa-xmark"></i></button>
-					                    <h3 class="modal-title text-center"><strong>Add Category</strong></h3>
+					                    <h3 class="modal-title text-center"><strong>Add Sub-category</strong></h3>
 					                </div>
 					                <div class="modal-body">
 					
-					                <form id="add-category" action="/admin/addcategory" method="post" enctype="multipart/form-data" th:object="${categoryForm}" class="form-horizontal form-bordered">
+					                <form id="add-subcategory" action="/admin/addsubcategory" method="post" enctype="multipart/form-data" th:object="${subCategoryForm}" class="form-horizontal form-bordered">
 					                    <div class="form-group">
 					                        <label class="col-md-3 control-label" for="name">Name <span class="text-danger">*</span></label>
 					                        <div class="col-md-6">
-					                            <input type="text" id="name" name="name" th:field="*{name}" class="form-control" placeholder="Enter the Name Of Category..">
+					                            <input type="text" id="name" name="name" th:field="*{name}" class="form-control" placeholder="Enter the Name Of Sub-category..">
 					                        </div>
 					                    </div>
 					                    <div class="form-group">
-					                        <label class="col-md-3 control-label" for="img">Image <span class="text-danger">*</span></label>
-					                        <div class="col-md-9">
-					                            <input type="file" id="img" name="img" accept="image/*" class="form-control">
-					                            <img src="#" id="dimg" width="200" th:hidden="hidden">
+					                        <label class="col-md-3 control-label" for="category">Category <span class="text-danger">*</span></label>
+					                        <div class="col-md-6">
+					                           <select name="category" id="category" th:field="*{category}" class="form-control">
+										 			<option th:each="category : ${Categories}" th:value="${category.id}" th:text="${category.name}" ></option>
+										 		</select>
 					                        </div>
 					                    </div>
 					
@@ -118,35 +119,36 @@ xmlns="http://www.w3.org/1999/xhtml"
 					    </div>
 					    <!-- Add Modal End-->
 					    <!-- Edit Modal Start-->
-					    <div id="modal-edit-category" class="modal fade" tabindex="-1" role="dialog" aria-hidden="true">
+					    <div id="modal-edit-subcategory" class="modal fade" tabindex="-1" role="dialog" aria-hidden="true">
 					        <div class="modal-dialog">
 					            <div class="modal-content">
 					                <div class="modal-header">
 					                <button type="button" class="btn btn-effect-ripple btn-primary pull-right" data-dismiss="modal"><i class="fa fa-times"></i><i class="fa-solid fa-xmark"></i></button>
-					                    <h3 class="modal-title text-center"><strong>Edit Category</strong></h3>
+					                    <h3 class="modal-title text-center"><strong>Edit Sub-category</strong></h3>
 					                </div>
 					                <div class="modal-body">
 					
-					                <form id="edit-category" method="post" action="/admin/updatecategory" enctype="multipart/form-data" th:object="${categoryForm}" class="form-horizontal form-bordered">
-					                	<input type="hidden" name="id" th:field="*{id}" id="edit-categoryid">
+					                <form id="edit-subcategory" method="post" action="/admin/updatesubcategory" enctype="multipart/form-data" th:object="${subCategoryForm}" class="form-horizontal form-bordered">
+					                	<input type="hidden" name="id" th:field="*{id}" id="edit-subcategoryid">
 					                     <div class="form-group">
 					                        <label class="col-md-3 control-label" for="name">Name <span class="text-danger">*</span></label>
 					                        <div class="col-md-6">
-					                            <input type="text" id="editname" name="name" th:field="*{name}" class="form-control" placeholder="Enter the Name Of Category..">
+					                            <input type="text" id="editname" name="name" th:field="*{name}" class="form-control" placeholder="Enter the Name Of Sub-catgory..">
 					                        </div>
 					                    </div>
 					                    <div class="form-group">
-					                        <label class="col-md-3 control-label" for="img">Image <span class="text-danger">*</span></label>
-					                        <div class="col-md-9">
-					                            <input type="file" id="editimg" name="img" accept="image/*" class="form-control">
-					                            <img src="#" id="editdimg" width="200" th:hidden="hidden">
+					                        <label class="col-md-3 control-label" for="editcategory">Category <span class="text-danger">*</span></label>
+					                        <div class="col-md-6">
+					                            <select name="category" id="editcategory" th:field="*{category}" class="form-control">
+										 			<option th:each="category : ${Categories}" th:value="${category.id}" th:text="${category.name}"></option>
+										 		</select>
 					                        </div>
 					                    </div>
 					
 										<div class="form-group">
 										 	<label class="col-md-3 control-label" for="status">Status</label>
 										 	<div class="col-md-6">
-										 		<select name="status" id="editstatus" th:field="*{status}" class="form-control">
+										 		<select name="status" id="editstatus" th:field="*{status}" class="form-control" >
 										 			<option value="0">Active</option>
 										 			<option Value="1">Inactive</option>
 										 		</select>
@@ -185,7 +187,7 @@ xmlns="http://www.w3.org/1999/xhtml"
 
        <div th:replace="admin/layouts/Scripts :: Scripts"></div>
 
-		<script src="/admin/js/pages/manageCategory.js"></script>
+		<script src="/admin/js/pages/manageSubCategory.js"></script>
         <script> 
         $(document).ready( function () {
             $('#myTable').DataTable();

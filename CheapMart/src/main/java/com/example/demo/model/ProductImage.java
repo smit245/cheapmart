@@ -10,6 +10,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.JoinColumns;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+import com.fasterxml.jackson.annotation.JsonBackReference;
 
 @Entity
 @Table(name="productimage")
@@ -21,6 +22,7 @@ public class ProductImage {
 	@ManyToOne
 	@JoinColumns(foreignKey = @ForeignKey(name="FK_image_product"),value= {
 			@JoinColumn(referencedColumnName = "id",name="pid",nullable=false)})
+	@JsonBackReference
 	private Product product;
 	
 	@Column(nullable = false,length=1000)

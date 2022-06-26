@@ -17,6 +17,18 @@ public class Contact {
 	@Column(nullable = false,length=100)
 	private String name;
 	
+	@Column(nullable = false,length=10)
+	private String phone;
+	
+	@Column(nullable = false,length=100)
+	private String email;
+	
+	@Column(nullable = false,length=500)
+	private String address;
+	
+	@Column(nullable = false,columnDefinition = "integer default 0")
+	private int status;
+	
 	public String getName() {
 		return name;
 	}
@@ -57,16 +69,6 @@ public class Contact {
 		this.status = status;
 	}
 
-	@Column(nullable = false,length=10)
-	private String phone;
 	
-	@Column(nullable = false,length=100)
-	private String email;
-	
-	@Column(nullable = false,length=500)
-	private String address;
-	
-	@Column(nullable = false,columnDefinition = "integer default 0")
-	private int status;
 	
 }

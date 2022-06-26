@@ -28,12 +28,15 @@ import org.springframework.web.servlet.support.RequestContextUtils;
 import com.example.demo.filehandle.FileUploadUtil;
 import com.example.demo.model.Admin;
 import com.example.demo.model.Category;
+import com.example.demo.model.SubCategory;
 import com.example.demo.model.User;
 import com.example.demo.service.AdminService;
 import com.example.demo.service.CategoryService;
+import com.example.demo.service.SubCategoryService;
 import com.example.demo.service.UserService;
 import com.example.demo.web.dto.AdminLoginDto;
 import com.example.demo.web.dto.CategoryFormDto;
+import com.example.demo.web.dto.SubCategoryFormDto;
 
 @Controller
 public class AdminController {
@@ -45,7 +48,11 @@ public class AdminController {
 	private CategoryService categoryService;
 	
 	@Autowired
+	private SubCategoryService subCategoryService;
+	
+	@Autowired
 	private AdminService adminService;
+	
 	
 	
 	@ModelAttribute("AdminLogin")
@@ -111,6 +118,8 @@ public class AdminController {
 		}
 		return "redirect:/admin/login?denied=true";
 	}
+	
+	//Users Routes
 	@GetMapping("/admin/AdminUser")
 	public String AdminUser(Model model,HttpServletRequest request) {
 		if(isAuthenticated(request)) {
@@ -120,6 +129,28 @@ public class AdminController {
 		}
 		return "redirect:/admin/login?denied=true";
 	}
+	@GetMapping("/admin/BlockOrUnblock")
+	public String AdminBlockUser(@RequestParam long userId , Model model,HttpServletRequest request) 
+	{
+		
+		if(isAuthenticated(request)) {
+			User user1 = userService.getUserbyId(userId);
+			
+			if(user1.getStatus() == 0)
+				user1.setStatus(1);
+			else
+				user1.setStatus(0);
+			
+			userService.saveUser(user1);
+			model.addAttribute("user", userService.getAllUserInfo());
+			//userService.delete(userId);
+			 return "redirect:/admin/AdminUser";
+		}
+		return "redirect:/admin/login?denied=true";
+	}
+	//End Users routes
+	
+	
 	@GetMapping("/admin/AdminProduct")
 	public String AdminProduct(Model model,HttpServletRequest request) {
 		if(isAuthenticated(request)) {
@@ -138,6 +169,7 @@ public class AdminController {
 		return "redirect:/admin/login?denied=true";
 	}
 	
+	//Catgeory Routes
 	@GetMapping("/admin/AdminCategory")
 	public String AdminCategories(@ModelAttribute("categoryForm") CategoryFormDto categoryFormDto ,Model model,HttpServletRequest request) {
 		if(isAuthenticated(request)) {
@@ -201,25 +233,66 @@ public class AdminController {
 		return "redirect:/admin/AdminCategory";
 		
 	}
-	@GetMapping("/admin/BlockOrUnblock")
-	public String AdminBlockUser(@RequestParam long userId , Model model,HttpServletRequest request) 
-	{
-		
+	//End Category Routes
+	
+	
+	//SubCatgeory Routes
+	@GetMapping("/admin/AdminSubCategory")
+	public String adminSubCategories(@ModelAttribute("subCategoryForm") SubCategoryFormDto subCategoryFormDto ,Model model,HttpServletRequest request) {
 		if(isAuthenticated(request)) {
-			User user1 = userService.getUserbyId(userId);
-			
-			if(user1.getStatus() == 0)
-				user1.setStatus(1);
-			else
-				user1.setStatus(0);
-			
-			userService.saveUser(user1);
-			model.addAttribute("user", userService.getAllUserInfo());
-			//userService.delete(userId);
-			 return "redirect:/admin/AdminUser";
+			//making label Map
+			Map<Integer,Map<String,String>> label= new HashMap<Integer,Map<String,String>>();
+			Map<String, String> map = new HashMap<String, String>();
+			map.put("class","label-success");
+			map.put("text", "Active");
+			label.put(0, map);
+			map = new HashMap<String, String>();
+			map.put("class","label-danger");
+			map.put("text", "Inative");
+			label.put(1, map);
+			Map<String, ?>  inputFlashMap= RequestContextUtils.getInputFlashMap(request);
+			if(inputFlashMap != null){
+				Set<String> key=inputFlashMap.keySet();
+				model.addAttribute(key.toString(), (String)inputFlashMap.get(key.toString()));
+			}
+			model.addAttribute("label", label);
+			model.addAttribute("title", "SubCategories");
+			model.addAttribute("SubCategories", subCategoryService.getAllSubCategories());
+			model.addAttribute("Categories", categoryService.getAllCategories());
+			return "admin/AdminSubCategory";
 		}
 		return "redirect:/admin/login?denied=true";
 	}
+	
+	@PostMapping("/admin/addsubcategory")
+	public String addSubCatgeory(@ModelAttribute("subCategoryForm") SubCategoryFormDto subCategoryFormDto,HttpServletRequest request,Model model) {
+		subCategoryService.save(subCategoryFormDto);
+		return "redirect:/admin/AdminSubCategory";
+		
+	}
+	
+	@GetMapping("/admin/editsubcategory")
+	@ResponseBody
+	public SubCategory editSubCategory(@RequestParam("id") long subCategoryId) {
+		SubCategory subCategory=subCategoryService.getSubCategoryById(subCategoryId);
+		return subCategory;
+	}
+	
+	@PostMapping("/admin/updatesubcategory")
+	public String updateSubCategory(@ModelAttribute("subCategoryForm") SubCategoryFormDto subCategoryFormDto,RedirectAttributes redirectAttributes){
+		SubCategory subCategory=subCategoryService.getSubCategoryById(subCategoryFormDto.getId());
+		subCategory.setName(subCategoryFormDto.getName());
+		subCategory.setCategory(categoryService.getCategoryById(subCategoryFormDto.getCategory()));
+		subCategory.setStatus(subCategoryFormDto.getStatus());
+		if(subCategoryService.updateSubCategory(subCategory)) {
+			redirectAttributes.addFlashAttribute("success", "Sub-category Successfully Updated");
+		}else {
+			redirectAttributes.addFlashAttribute("error", "Sub-category Not Updated.");
+		}
+		return "redirect:/admin/AdminSubCategory";
+		
+	}
+	//End SubCategory Routes
 	
 	
 	@GetMapping("/admin/logout")
