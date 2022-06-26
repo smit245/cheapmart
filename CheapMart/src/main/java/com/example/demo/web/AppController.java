@@ -1,10 +1,15 @@
 package com.example.demo.web;
 
+import java.util.Map;
+import java.util.Set;
+
+import javax.servlet.http.HttpSession;
+
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
-
+import org.springframework.web.servlet.support.RequestContextUtils;
 
 import com.example.demo.web.dto.UserRegistrationDto;
 
@@ -16,6 +21,7 @@ public class AppController {
 	public UserRegistrationDto userRegistrationDto() {
 		return new UserRegistrationDto();
 	}
+	
 	
 	@GetMapping("/")
 	public String viewHomePage(Model model) {

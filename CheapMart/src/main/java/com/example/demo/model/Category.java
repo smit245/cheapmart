@@ -71,5 +71,4 @@ public class Category {
 		return id;
 	}
 
-	
 }

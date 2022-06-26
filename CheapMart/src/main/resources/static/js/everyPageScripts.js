@@ -108,15 +108,51 @@ $('#registration').validate({
     }
 });
 
-$("#registration").submit(function(event){
-	if($(this).valid()){
-		return true;
-	}else{
-		event.preventDefault();
-		return false;
-	}
-	
+$('#login').validate({
+    errorClass: 'help-block animation-pullUp', // You can change the animation class for a different entrance animation - check animations page
+    errorElement: 'div',
+    errorPlacement: function(error, e) {
+        e.parents('.form-group ').append(error);
+    },
+    highlight: function(e) {
+        $(e).closest('.form-group').removeClass('has-success has-error').addClass('has-error');
+        $(e).closest('.help-block').remove();
+    },
+    success: function(e) {
+        // You can use the following if you would like to highlight with green color the input after successful validation!
+        // e.closest('.form-group').removeClass('has-success has-error');
+        e.closest('.form-group').removeClass('has-success has-error').addClass('has-success');
+        e.closest('.help-block').remove();
+        // if (e.closest('.form-group').find('.help-block').length === 2) {
+        //     e.closest('.help-block').remove();
+        // } else {
+            //e.closest('.form-group').removeClass('has-success has-error');
+            //e.closest('.help-block').remove();
+        // }
+    },
+    rules: {
+        'email': {
+            required: true,
+            email: true
+        },
+        'password': {
+            required: true,
+            minlength: 5
+        },
+    },
+    messages: {
+        'email': {
+            required: "Please Enter Your Email",
+            email: "Email is Not In Proper Formate"
+        },
+        'password': {
+            required: "Please Enter The Password",
+            minlength: "Minimum Length Should Be Atleast 5"
+        },
+    }
 });
+
+
 
 //pincode api code to get city and state.
 $(".pincode").on('keyup change',function(){
@@ -172,3 +208,57 @@ $(".pincode").on('keyup change',function(){
         $(".state").val("");
     }
 });
+
+if (window.location.href.indexOf("?loggedout") > -1) {
+     $.bootstrapGrowl('<h4><strong>Logged Out!!!</strong></h4> <p>You Have Been Logged Out</p>', {
+        type: "info",
+        delay: 4000,
+        allow_dismiss: true,
+        offset: {from: 'top', amount: 20},
+        align: "center",
+        width: 300
+    });
+}
+if (window.location.href.indexOf("?successregister") > -1) {
+     $.bootstrapGrowl('<h4><strong>Registered...</strong></h4> <p>You Have Successfully Registered Please Login</p>', {
+        type: "success",
+        delay: 4000,
+        allow_dismiss: true,
+        offset: {from: 'top', amount: 20},
+        align: "center",
+        width: 300
+    });
+}
+
+if (window.location.href.indexOf("?alreadyregistered") > -1) {
+     $.bootstrapGrowl('<h4><strong>!!Already Registered!!</strong></h4> <p>Email Already Exists Please Login</p>', {
+        type: "danger",
+        delay: 5000,
+        allow_dismiss: true,
+        offset: {from: 'top', amount: 20},
+        align: "center",
+        width: 300
+    });
+}
+
+if (window.location.href.indexOf("?error") > -1) {
+     $.bootstrapGrowl('<h4><strong>!!Wrong!!</strong></h4> <p>Your Credentials Are Wrong</p>', {
+        type: "danger",
+        delay: 5000,
+        allow_dismiss: true,
+        offset: {from: 'top', amount: 20},
+        align: "center",
+        width: 300
+    });
+}
+
+if (window.location.href.indexOf("?success") > -1) {
+     $.bootstrapGrowl('<h4><strong>Success...</strong></h4> <p>Logged in Successfully</p>', {
+        type: "success",
+        delay: 5000,
+        allow_dismiss: true,
+        offset: {from: 'top', amount: 20},
+        align: "center",
+        width: 300
+    });
+}
