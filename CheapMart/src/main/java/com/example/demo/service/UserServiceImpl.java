@@ -16,6 +16,7 @@ import org.springframework.stereotype.Service;
 
 import com.example.demo.model.User;
 import com.example.demo.repos.UserRepository;
+import com.example.demo.session.UserSession;
 import com.example.demo.web.dto.UserRegistrationDto;
 
 @Service
@@ -52,12 +53,14 @@ public class UserServiceImpl implements UserService{
 	@Override
 	public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
 		User user=userRepository.findByEmail(username);
+		UserSession userSession;
 		if(user==null) {
 			throw new UsernameNotFoundException("Invalid Username Password");
 		}
 		Collection<String> c=new HashSet<String>();
 		c.add("USER");
-		return new org.springframework.security.core.userdetails.User(user.getEmail(), user.getPassword(), myRolesToAuthorities(c));
+		userSession= new UserSession(user.getEmail(), user.getPassword(), true, true, true, true, myRolesToAuthorities(c), user.getId(), user.getName(), user.getPincode());
+		return userSession;
 	}
 	
 	private Collection<? extends GrantedAuthority> myRolesToAuthorities(Collection<String> roles){

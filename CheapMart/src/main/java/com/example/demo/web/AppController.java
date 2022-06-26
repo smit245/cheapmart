@@ -1,20 +1,20 @@
 package com.example.demo.web;
 
 import java.util.List;
-import java.util.Map;
-import java.util.Set;
 
-import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.servlet.support.RequestContextUtils;
+
 
 import com.example.demo.model.Category;
 import com.example.demo.service.CategoryService;
+import com.example.demo.session.UserSession;
 import com.example.demo.web.dto.UserRegistrationDto;
 
 
@@ -36,6 +36,11 @@ public class AppController {
 	
 	@GetMapping("/")
 	public String viewHomePage(Model model) {
+		Authentication auth=SecurityContextHolder.getContext().getAuthentication();
+		UserSession userSession=(UserSession)auth.getPrincipal();
+		System.out.println("Id:"+userSession.getId());
+		System.out.println("Name:"+userSession.getName());
+		System.out.println("Pincode:"+userSession.getPincode());
 		model.addAttribute("title", "Home");
 		return "index";
 	}
