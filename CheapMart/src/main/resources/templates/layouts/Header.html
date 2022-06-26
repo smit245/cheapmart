@@ -71,23 +71,12 @@
 									</span>
 									<div id="menu">
 										<ul>
-											<li><span><a href="#0">Collections</a></span>
-												<ul class="fix_long">
-													<li><a href="listing-grid-1-full.html">Trending</a></li>
-													<li><a href="listing-grid-2-full.html">Life style</a></li>
-													<li><a href="listing-grid-3.html">Running</a></li>
-													<li><a href="listing-grid-4-sidebar-left.html">Latest products</a></li>
-													<li><a href="listing-grid-4-sidebar-left.html">Popular</a></li>
-													<li><a href="listing-grid-4-sidebar-left.html">Most Viewed</a></li>
-													<li><a href="listing-grid-4-sidebar-left.html">Most purchased</a></li>
-													<li><a href="listing-grid-4-sidebar-left.html">Men's</a></li>
-													<li><a href="listing-grid-4-sidebar-left.html">Women's</a></li>
-													<li><a href="listing-grid-4-sidebar-left.html">Child</a></li>
-													<li><a href="listing-grid-4-sidebar-left.html">Past collection</a></li>
-													<li><a href="listing-grid-5-sidebar-right.html">View all Collections</a></li>
+											<li th:each="category : ${categories}"><span><a href="#0" th:text="${category.name}"></a></span>
+												<ul class="fix_long" th:if="${category.subcategory}">
+													<li><a th:each="subcategory : ${category.subcategory}" th:text="${subcategory.name}" th:href="@{/products?c=__${subcategory.id}__}">Trending</a></li>
 												</ul>
 											</li>
-											<li><span><a href="#">Men</a></span>
+											<!-- <li><span><a href="#">Men</a></span>
 												<ul>
 													<li><a href="listing-grid-6-sidebar-left.html">Offers</a></li>
 													<li><a href="listing-grid-7-sidebar-right.html">Shoes</a></li>
@@ -127,7 +116,7 @@
 													<li><a href="listing-row-4-sidebar-extended.html">For Boys</a></li>
 													<li><a href="listing-grid-1-full.html">For Girls</a></li>
 												</ul>
-											</li>
+											</li> -->
 										</ul>
 									</div>
 								</li>

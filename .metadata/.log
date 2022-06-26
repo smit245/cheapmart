@@ -5565,3 +5565,15 @@ java.lang.InterruptedException
 
 !ENTRY org.eclipse.lsp4e 1 0 2022-06-26 15:11:01.042
 !MESSAGE [Info]	ESLint server running in node v16.13.2
+
+!ENTRY org.springframework.tooling.ls.eclipse.commons 1 0 2022-06-26 15:56:19.123
+!MESSAGE ClasspathListenerHandler removeClasspathListener sts4.classpath.MHAUFtQh
+
+!ENTRY org.springframework.tooling.ls.eclipse.commons 1 0 2022-06-26 15:56:19.125
+!MESSAGE unsubscribing from classpath changes: sts4.classpath.MHAUFtQh
+
+!ENTRY org.springframework.tooling.ls.eclipse.commons 1 0 2022-06-26 15:56:19.126
+!MESSAGE subsribers = {}
+
+!ENTRY org.springframework.tooling.ls.eclipse.commons 1 0 2022-06-26 15:56:19.128
+!MESSAGE ClasspathListenerHandler removeClasspathListener sts4.classpath.MHAUFtQh => OK
