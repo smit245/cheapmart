@@ -197,13 +197,14 @@ public class AdminController {
 	}
 	
 	@PostMapping("/admin/addcategory")
-	public String addCatgeory(@ModelAttribute("categoryForm") CategoryFormDto categoryFormDto,@RequestParam("img") MultipartFile multipartFile,HttpServletRequest request,Model model) throws IOException {
+	public String addCatgeory(@ModelAttribute("categoryForm") CategoryFormDto categoryFormDto,@RequestParam("img") MultipartFile multipartFile,HttpServletRequest request,Model model,RedirectAttributes redirectAttributes) throws IOException {
 		
 		String image = String.valueOf(System.currentTimeMillis())+StringUtils.cleanPath(multipartFile.getOriginalFilename());
 		categoryFormDto.setImage(image);
 		categoryService.save(categoryFormDto);
 		String uploadDir=Paths.get("src/main/resources/static/admin/img/category/").toAbsolutePath().toString();
 		FileUploadUtil.saveFile(uploadDir, image, multipartFile);
+		redirectAttributes.addFlashAttribute("success", "Category Successfully Added");
 		return "redirect:/admin/AdminCategory";
 		
 	}
@@ -221,11 +222,11 @@ public class AdminController {
 		category.setName(categoryFormDto.getName());
 		category.setStatus(categoryFormDto.getStatus());
 		if(categoryService.updateCategory(category)) {
-			redirectAttributes.addFlashAttribute("success", "Category Successfully Updated");
 			if(multipartFile.getSize()>0) {
 				String image=category.getImage();
 				String uploadDir=Paths.get("src/main/resources/static/admin/img/category/").toAbsolutePath().toString();
 				FileUploadUtil.saveFile(uploadDir, image, multipartFile);
+				redirectAttributes.addFlashAttribute("success", "Category Successfully Updated");
 			}
 		}else {
 			redirectAttributes.addFlashAttribute("error", "Category Not Updated.");
@@ -265,8 +266,9 @@ public class AdminController {
 	}
 	
 	@PostMapping("/admin/addsubcategory")
-	public String addSubCatgeory(@ModelAttribute("subCategoryForm") SubCategoryFormDto subCategoryFormDto,HttpServletRequest request,Model model) {
+	public String addSubCatgeory(@ModelAttribute("subCategoryForm") SubCategoryFormDto subCategoryFormDto,HttpServletRequest request,Model model,RedirectAttributes redirectAttributes) {
 		subCategoryService.save(subCategoryFormDto);
+		redirectAttributes.addFlashAttribute("success", "Sub-category Successfully Added");
 		return "redirect:/admin/AdminSubCategory";
 		
 	}

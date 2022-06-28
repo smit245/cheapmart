@@ -7,7 +7,7 @@
 		<div class="modal_header">
 			<h3>Sign In</h3>
 		</div>
-		<form method="post" action="" id="login">
+		<form method="post" action="/" id="login">
 			<div class="sign-in-wrapper">
 			<!-- 	<a href="#0" class="social_bt facebook">Login with Facebook</a>
 				<a href="#0" class="social_bt google">Login with Google</a> -->
@@ -60,17 +60,17 @@
 			<div class="sign-in-wrapper">
 				<div class="form-group">
 					<label>Name</label>
-					<input type="text" class="form-control" name="name" id="name" th:field="*{name}">
+					<input type="text" class="form-control" name="name" id="name" placeholder="Enter Name..." th:field="*{name}">
 					<i class="ti-user"></i>
 				</div>
 				<div class="form-group">
 					<label>Email</label>
-					<input type="email" class="form-control" name="email" id="email" th:field="*{email}">
+					<input type="email" class="form-control" name="email" id="email" placeholder="Enter Email..." th:field="*{email}">
 					<i class="ti-email"></i>
 				</div>
 				<div class="form-group">
 					<label>Phone No.</label>
-					<input type="text" class="form-control" name="phone" id="phone" th:field="*{phone}">
+					<input type="text" class="form-control" name="phone" id="phone" placeholder="Enter Phone..." th:field="*{phone}">
 					<i class="ti-mobile"></i>
 				</div>
 				<div class="form-group">
@@ -79,38 +79,37 @@
 						<option value="" th:disabled="disabled" th:selected="selected"><i><b>&#9893;</b></i>&nbsp;Select Gender</option>
 						<option value="Male">Male</option>
 						<Option value="Female">Female</option>
-						
 					</select>
 					
 				</div>
 				<div class="form-group">
 					<label>Pincode</label>
-					<input type="text" class="form-control pincode" name="pincode" id="pincode" th:field="*{pincode}">
+					<input type="text" class="form-control pincode" name="pincode" id="pincode" placeholder="Enter Pincode..." th:field="*{pincode}">
 					<i class="ti-location-pin"></i>
 				</div>
 				<div class="form-group">
 					<label>City</label>
-					<input type="text" class="form-control city" name="city" id="city" th:field="*{city}" readonly>
+					<input type="text" class="form-control city" name="city" id="city" placeholder="City..." th:field="*{city}" readonly>
 					<i class="ti-location-arrow"></i>
 				</div>
 				<div class="form-group">
 					<label>State</label>
-					<input type="text" class="form-control state" name="state" id="state" th:field="*{state}" readonly>
+					<input type="text" class="form-control state" name="state" id="state" placeholder="State..." th:field="*{state}" readonly>
 					<i class="ti-location-arrow"></i>
 				</div>
 				<div class="form-group">
 					<label>Address</label>
-					<textarea class="form-control" name="address" id="address" rows="5" th:field="*{address}"></textarea>
+					<textarea class="form-control" name="address" id="address" rows="5" placeholder="Enter Address..." th:field="*{address}"></textarea>
 					<i class="ti-location-arrow"></i>
 				</div>
 				<div class="form-group">
 					<label>Password</label>
-					<input type="password" class="form-control" name="password" id="password" th:field="*{password}">
+					<input type="password" class="form-control" name="password" id="password" placeholder="Choose the Secured One..." th:field="*{password}">
 					<i class="ti-lock"></i>
 				</div>  
 				<div class="form-group">
 					<label>Confirm Password</label>
-					<input type="password" class="form-control" name="confirm-password" id="confirm-password">
+					<input type="password" class="form-control" name="confirm-password" placeholder="Don't Copy, Write Again..." id="confirm-password">
 					<i class="ti-lock"></i>
 				</div>  
 				<div class="text-center">

@@ -36,11 +36,11 @@ public class AppController {
 	
 	@GetMapping("/")
 	public String viewHomePage(Model model) {
-		Authentication auth=SecurityContextHolder.getContext().getAuthentication();
-		UserSession userSession=(UserSession)auth.getPrincipal();
-		System.out.println("Id:"+userSession.getId());
-		System.out.println("Name:"+userSession.getName());
-		System.out.println("Pincode:"+userSession.getPincode());
+//		Authentication auth=SecurityContextHolder.getContext().getAuthentication();
+//		UserSession userSession=(UserSession)auth.getPrincipal();
+//		System.out.println("Id:"+userSession.getId());
+//		System.out.println("Name:"+userSession.getName());
+//		System.out.println("Pincode:"+userSession.getPincode());
 		model.addAttribute("title", "Home");
 		return "index";
 	}
@@ -48,7 +48,7 @@ public class AppController {
 	@GetMapping("/about")
 	public String viewAboutPage(Model model) {
 		model.addAttribute("title", "About Us");
-		return "about"; 
+		return "about";
 	}
 	
 	@GetMapping("/contact")

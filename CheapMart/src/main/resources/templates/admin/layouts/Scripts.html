@@ -16,5 +16,31 @@
 			$('#myTable').DataTable();
 		});
   </script>
+<script th:inline="javascript">
+/*<![CDATA[*/	
+var success= /*[[${success}]]*/ null;	
+if (success != null) {
+    $.bootstrapGrowl('<h4><strong>Success...</strong></h4> <p>'+success+'</p>', {
+       type: "success",
+       delay: 4000,
+       allow_dismiss: true,
+       offset: {from: 'top', amount: 20},
+       align: "center",
+       width: 300
+   });
+}
 
+var error= /*[[${error}]]*/ null;
+if (error != null) {
+    $.bootstrapGrowl('<h4><strong>!!Error!!</strong></h4> <p>'+error+'</p>', {
+       type: "danger",
+       delay: 4000,
+       allow_dismiss: true,
+       offset: {from: 'top', amount: 20},
+       align: "center",
+       width: 300
+   });
+}
+/*]]>*/
+</script>
  </div>

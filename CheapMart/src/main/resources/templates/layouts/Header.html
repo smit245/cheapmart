@@ -71,7 +71,7 @@
 									</span>
 									<div id="menu">
 										<ul>
-											<li th:each="category : ${categories}"><span><a href="#0" th:text="${category.name}"></a></span>
+											<li th:each="category : ${categories}" th:if="${#lists.size(category.subcategory)>0}"><span><a href="#0" th:text="${category.name}"></a></span>
 												<ul class="fix_long" th:if="${category.subcategory}">
 													<li><a th:each="subcategory : ${category.subcategory}" th:text="${subcategory.name}" th:href="@{/products?c=__${subcategory.id}__}">Trending</a></li>
 												</ul>
@@ -179,7 +179,7 @@
 												<a href="account.html"><i class="ti-user"></i>My Profile</a>
 											</li>
 											<li>
-												<a href="help.html"><i class="ti-help-alt"></i>Help and Faq</a>
+												<a href="/logout"><i class="ti-lock"></i>Logout</a>
 											</li>
 										</ul>
 									</div>
