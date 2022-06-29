@@ -56,4 +56,10 @@ public class AppController {
 		model.addAttribute("title", "Contact Us");
 		return "contact";
 	}
+	
+	@GetMapping("/addproducts")
+	public String viewAddProductPage(Model model) {
+		model.addAttribute("title", "Add Product");
+		return "addproduct";
+	}
 }

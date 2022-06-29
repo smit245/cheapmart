@@ -61,7 +61,7 @@ public class UserSecurityConfig extends WebSecurityConfigurerAdapter{
 				"/buy",
 				"/bid",
 				"/checkout",
-				"addproduct")
+				"/addproduct")
 		.hasAuthority("USER")
 		.anyRequest()
 		.authenticated()
