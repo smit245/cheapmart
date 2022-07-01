@@ -4,8 +4,6 @@ import java.util.List;
 
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.core.Authentication;
-import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -14,7 +12,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 
 import com.example.demo.model.Category;
 import com.example.demo.service.CategoryService;
-import com.example.demo.session.UserSession;
+
 import com.example.demo.web.dto.UserRegistrationDto;
 
 
@@ -59,6 +57,7 @@ public class AppController {
 	
 	@GetMapping("/addproducts")
 	public String viewAddProductPage(Model model) {
+		
 		model.addAttribute("title", "Add Product");
 		return "addproduct";
 	}

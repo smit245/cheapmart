@@ -11,7 +11,6 @@ import javax.persistence.JoinColumns;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
 
 @Entity
 @Table(name="orders")
@@ -24,12 +23,10 @@ public class Order {
 	@ManyToOne
 	@JoinColumns(foreignKey = @ForeignKey(name="FK_order_product"),value= {
 			@JoinColumn(referencedColumnName = "id",name="pid",nullable=false)})
-	@JsonBackReference
 	private Product product;
 	
 	@ManyToOne
 	@JoinColumn(name="uid",nullable=false)
-	@JsonBackReference
 	private User user;
 	
 	@Column(nullable = false)

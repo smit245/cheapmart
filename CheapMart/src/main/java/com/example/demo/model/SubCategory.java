@@ -15,7 +15,6 @@ import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 import com.fasterxml.jackson.annotation.JsonIdentityReference;
-import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 @Entity
 @Table(name="subcategory")
@@ -30,7 +29,6 @@ public class SubCategory {
 	private Category category;
 	
 	@OneToMany(mappedBy = "subcategory",fetch=FetchType.LAZY)
-	@JsonManagedReference
 	private Set<Product> product= new HashSet<>();
 	
 	@Column(nullable = false,length=100)

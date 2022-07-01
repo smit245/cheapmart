@@ -17,8 +17,6 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
-import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 @Entity
 @Table(name="product")
@@ -30,30 +28,20 @@ public class Product {
 	@ManyToOne
 	@JoinColumns(foreignKey = @ForeignKey(name="FK_product_subcategory"),value= {
 			@JoinColumn(referencedColumnName = "id",name = "scid",nullable=false)})
-	@JsonBackReference
 	private SubCategory subcategory;
 	
 	@ManyToOne
 	@JoinColumns(foreignKey = @ForeignKey(name="FK_product_user"),value= {
 			@JoinColumn(referencedColumnName = "id",name = "uid",nullable=false)})
-	@JsonBackReference
 	private User user;
 	
 	@OneToMany(mappedBy = "product",fetch=FetchType.EAGER)
-	@JsonManagedReference
 	private Set<ProductImage> productimage = new HashSet<>();
 	
 	@OneToMany(mappedBy = "product",fetch=FetchType.EAGER)
-	@JsonManagedReference
 	private Set<Order> order=new HashSet<>();
 	
-	public Set<Order> getOrder() {
-		return order;
-	}
-
-	public void setOrder(Set<Order> order) {
-		this.order = order;
-	}
+	
 
 
 	@Column(nullable = false,length=100)
@@ -79,13 +67,16 @@ public class Product {
 	@ManyToOne
 	@JoinColumns(foreignKey = @ForeignKey(name="FK_bidder_product"),value= {
 			@JoinColumn(referencedColumnName = "id",name="bidderid",nullable=false)})
-	@JsonBackReference
 	private User bidder;
 	
 	@OneToMany(mappedBy = "product",fetch=FetchType.EAGER)
-	@JsonManagedReference
 	private Set<Bidding> bidding=new HashSet<>();
 	
+	@Column(nullable=false)
+	private int isBidding;
+	
+	
+
 	@Column(nullable=true)
 	private double minIncrementAmt;
 	
@@ -281,4 +272,19 @@ public class Product {
 		this.status = status;
 	}
 	
+	public Set<Order> getOrder() {
+		return order;
+	}
+
+	public void setOrder(Set<Order> order) {
+		this.order = order;
+	}
+	
+	public int getIsBidding() {
+		return isBidding;
+	}
+
+	public void setIsBidding(int isBidding) {
+		this.isBidding = isBidding;
+	}
 }

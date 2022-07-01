@@ -16,7 +16,6 @@ import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.UniqueConstraint;
 
-import com.fasterxml.jackson.annotation.JsonManagedReference;
  
 @Entity
 @Table(name = "users",uniqueConstraints = @UniqueConstraint(columnNames = "email "))
@@ -26,11 +25,9 @@ public class User {
 	private Long id;
 	
 	@OneToMany(mappedBy = "user",fetch=FetchType.LAZY)
-	@JsonManagedReference
 	private Set<Product> product = new HashSet<>();
 	
 	@OneToMany(mappedBy="user", fetch=FetchType.LAZY)
-	@JsonManagedReference
 	private Set<Bidding> bidding = new HashSet<>();
 	
 	

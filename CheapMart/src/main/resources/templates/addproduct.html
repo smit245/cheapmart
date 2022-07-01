@@ -34,24 +34,28 @@
 										<div class="form_container">
 											
 											<div class="form-group">
-												<input type="text" class="form-control" name="email" id="email" placeholder="Email*">
+												<input type="text" class="form-control" name="name" id="name" placeholder="Product Name...">
 											</div>
 											<div class="form-group">
-												<input type="password" class="form-control" name="password_in" id="password_in" value="" placeholder="Password*">
-											</div>
-										</div>
-										<!-- /form_container -->
-									</div>
-								</div>
-								<div class="col-xl-6 col-lg-6 col-md-8">
-									<div class="box_account">
-										<h3>Other Details</h3> <small class="float-right pt-2">* Required Fields</small>
-										<div class="form_container">
-											<div class="form-group">
-												<input type="email" class="form-control" name="email" id="email_2" placeholder="Email*">
+												<input type="text" class="form-control" name="price" id="price" placeholder="Product price...">
 											</div>
 											<div class="form-group">
-												<input type="password" class="form-control" name="password_in_2" id="password_in_2" value="" placeholder="Password*">
+												<select name="category" id="category" class="form-control">
+													<option selected disabled>--Select Category--</option>
+													<option th:each="category : ${categories}" th:if="${#lists.size(category.subcategory)>0}" th:value="${category.id}" th:text="${category.name}"></option>
+												</select>
+											</div>
+											<div class="form-group">
+												<select name="subCategory" id="subCategory" class="form-control">
+													<option selected disabled>--Select Sub Category--</option>
+												</select>
+											</div>
+											<div class="form-group">
+												<textarea class="form-control" name="description" id="description" rows="5" style="height:auto" placeholder="Enter Product Full Spec Including How Much Old is it?"></textarea>
+											</div>
+											
+											<div class="form-group">
+												<input type="file" class="form-control" name="images" id="images" placeholder="Select All The Product Images" accept="image/*" multiple>
 											</div>
 											<hr>
 											<div class="form-group">
@@ -175,6 +179,21 @@
 											</div>
 											<!-- /company -->
 											<hr>
+										</div>
+										<!-- /form_container -->
+									</div>
+								</div>
+								<div class="col-xl-6 col-lg-6 col-md-8">
+									<div class="box_account">
+										<h3>Other Details</h3> <small class="float-right pt-2">* Required Fields</small>
+										<div class="form_container">
+											<div class="form-group">
+												<input type="email" class="form-control" name="email" id="email_2" placeholder="Email*">
+											</div>
+											<div class="form-group">
+												<input type="password" class="form-control" name="password_in_2" id="password_in_2" value="" placeholder="Password*">
+											</div>
+											
 											<div class="form-group">
 												<label class="container_check">Accept <a href="#0">Terms and conditions</a>
 													<input type="checkbox">
