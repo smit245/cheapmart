@@ -11,4 +11,6 @@
 		<item key="EditorSelectionDialog.STORE_ID_INTERNAL_EXTERNAL" value="true"/>
 		<item key="EditorSelectionDialog.STORE_ID_DESCR" value="Disc Image File"/>
 	</section>
+	<section name="ImportExportAction">
+	</section>
 </section>
