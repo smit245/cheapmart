@@ -1,11 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <section name="Workbench">
 	<section name="org.eclipse.ui.texteditor.FindReplaceDialog">
-		<item key="selection" value="BOOTSTRAP"/>
-		<item key="casesensitive" value="false"/>
+		<item key="selection" value="int"/>
+		<item key="casesensitive" value="true"/>
 		<item key="wholeword" value="false"/>
 		<item key="isRegEx" value="false"/>
 		<list key="findhistory">
+			<item value="int"/>
 			<item value="alert"/>
 			<item value="bootstrap"/>
 			<item value="Jackson"/>
@@ -13,9 +14,9 @@
 			<item value="admin/"/>
 			<item value="admin"/>
 			<item value="&#x09;&#x09;.logoutSuccessUrl(&quot;/login?loggedout&quot;)"/>
-			<item value="has-"/>
 		</list>
 		<list key="replacehistory">
+			<item value="Integer"/>
 		</list>
 	</section>
 	<section name="org.eclipse.ui.texteditor.GotoLineAction$GotoLineDialog_dialogBounds">
