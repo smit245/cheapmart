@@ -19,8 +19,7 @@
 							<div class="breadcrumbs">
 								<ul>
 									<li><a href="#">Home</a></li>
-									<li><a href="#">Category</a></li>
-									<li>Page active</li>
+									<li>Sell Product</li>
 								</ul>
 							</div>
 							<h1>Add Product To Sell</h1>
@@ -37,7 +36,7 @@
 												<input type="text" class="form-control" name="name" id="name" placeholder="Product Name...">
 											</div>
 											<div class="form-group">
-												<input type="text" class="form-control" name="price" id="price" placeholder="Product price...">
+												<input type="text" class="form-control" name="price" id="price" placeholder="Product Price...">
 											</div>
 											<div class="form-group">
 												<select name="category" id="category" class="form-control">
@@ -55,20 +54,28 @@
 											</div>
 											
 											<div class="form-group">
-												<input type="file" class="form-control" name="images" id="images" placeholder="Select All The Product Images" accept="image/*" multiple>
+												<label class="col-md-3 control-label">Select Images</label>
+												<div class="col-md-12">
+													<input type="file" class="form-control" name="images" id="images" accept="image/*" multiple>
+													<small class="float-right pt-2">Select All The Images For Your Product</small>
+												</div>
 											</div>
 											<hr>
 											<div class="form-group">
-												<label class="container_radio" style="display: inline-block; margin-right: 15px;">Private
-													<input type="radio" name="client_type" checked value="private">
-													<span class="checkmark"></span>
-												</label>
-												<label class="container_radio" style="display: inline-block;">Company
-													<input type="radio" name="client_type" value="company">
-													<span class="checkmark"></span>
-												</label>
+												
+												<div class="col-md-6">
+													<label class="col-md-6 control-label">Is it Auction?</label>
+													<label class="container_radio" style="display: inline-block; margin-right: 15px;">Yes
+														<input type="radio" name="isBidding" value="1" >
+														<span class="checkmark"></span>
+													</label>
+													<label class="container_radio" style="display: inline-block;">No
+														<input type="radio" name="isBidding" value="0" checked>
+														<span class="checkmark"></span>
+													</label>
+												</div>
 											</div>
-											<div class="private box">
+											<div class="yes box" style="display: none;">
 												<div class="row no-gutters">
 													<div class="col-6 pr-1">
 														<div class="form-group">
@@ -128,56 +135,7 @@
 												<!-- /row -->
 												
 											</div>
-											<!-- /private -->
-											<div class="company box" style="display: none;">
-												<div class="row no-gutters">
-													<div class="col-12">
-														<div class="form-group">
-															<input type="text" class="form-control" placeholder="Company Name*">
-														</div>
-													</div>
-													<div class="col-12">
-														<div class="form-group">
-															<input type="text" class="form-control" placeholder="Full Address">
-														</div>
-													</div>
-												</div>
-												<!-- /row -->
-												<div class="row no-gutters">
-													<div class="col-6 pr-1">
-														<div class="form-group">
-															<input type="text" class="form-control" placeholder="City*">
-														</div>
-													</div>
-													<div class="col-6 pl-1">
-														<div class="form-group">
-															<input type="text" class="form-control" placeholder="Postal Code*">
-														</div>
-													</div>
-												</div>
-												<!-- /row -->
-												<div class="row no-gutters">
-													<div class="col-6 pr-1">
-														<div class="form-group">
-															<div class="custom-select-form">
-																<select class="wide add_bottom_10" name="country" id="country_2">
-																		<option value="" selected>Country*</option>
-																		<option value="Europe">Europe</option>
-																		<option value="United states">United states</option>
-																		<option value="Asia">Asia</option>
-																</select>
-															</div>
-														</div>
-													</div>
-													<div class="col-6 pl-1">
-														<div class="form-group">
-															<input type="text" class="form-control" placeholder="Telephone *">
-														</div>
-													</div>
-												</div>
-												<!-- /row -->
-											</div>
-											<!-- /company -->
+											
 											<hr>
 										</div>
 										<!-- /form_container -->
@@ -217,11 +175,14 @@
 			
 			<div th:include="layouts/Script :: Scripts"></div>
 			<script>
-				$('input[name="client_type"]').on("click", function() {
+				$('input[name="isBidding"]').on("click", function() {
 				    var inputValue = $(this).attr("value");
 				    var targetBox = $("." + inputValue);
-				    $(".box").not(targetBox).hide();
-				    $(targetBox).show();
+				    if(inputValue==0){
+				    	$(".yes").hide();
+				    }else{
+				    	$(".yes").show();
+				    }
 				});
 			</script>
 			
