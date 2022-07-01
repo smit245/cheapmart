@@ -26,6 +26,11 @@ public class Product {
 	private Long id;
 	
 	@ManyToOne
+	@JoinColumns(foreignKey = @ForeignKey(name="FK_product_category"),value= {
+			@JoinColumn(referencedColumnName = "id",name = "cid",nullable=false)})
+	private Category category;
+
+	@ManyToOne
 	@JoinColumns(foreignKey = @ForeignKey(name="FK_product_subcategory"),value= {
 			@JoinColumn(referencedColumnName = "id",name = "scid",nullable=false)})
 	private SubCategory subcategory;

@@ -26,6 +26,9 @@ public class Category {
 	@OneToMany(mappedBy = "category",fetch=FetchType.EAGER)
 	private Set<SubCategory> subcategory= new HashSet<>();
 	
+	@OneToMany(mappedBy = "category",fetch=FetchType.LAZY)
+	private Set<Product> product= new HashSet<>();
+	
 	@Column(nullable = false,length=100)
 	private String name;
 	

@@ -2624,3 +2624,51 @@ Binding(CTRL+SHIFT+C,
 		,,true),null),
 	org.eclipse.ui.defaultAcceleratorConfiguration,
 	org.eclipse.ui.textEditorScope,,,system)
+
+!ENTRY org.eclipse.ui 2 2 2022-07-01 22:14:54.459
+!MESSAGE Invalid property category path: org.springframework.ide.eclipse.beans.ui.properties.ProjectPropertyPage (bundle: org.springframework.ide.eclipse.xml.namespaces, propertyPage: org.springframework.ide.eclipse.beans.ui.namespaces.projectPropertyPage)
+
+!ENTRY org.springframework.tooling.ls.eclipse.commons 1 0 2022-07-01 22:15:06.505
+!MESSAGE Entering DelegatingStreamConnectionProvider()
+
+!ENTRY org.springframework.tooling.ls.eclipse.commons 1 0 2022-07-01 22:15:06.506
+!MESSAGE DelegatingStreamConnectionProvider classloader = org.eclipse.osgi.internal.loader.EquinoxClassLoader@580bab15[org.springframework.tooling.boot.ls:1.33.0.202204250653(id=569)]
+
+!ENTRY org.springframework.tooling.ls.eclipse.commons 1 0 2022-07-01 22:15:06.509
+!MESSAGE SpringBootLanguageServer exists!
+
+!ENTRY org.springframework.tooling.ls.eclipse.commons 1 0 2022-07-01 22:15:06.547
+!MESSAGE Instantiating ReusableClasspathListenerHandler
+
+!ENTRY org.springframework.tooling.ls.eclipse.commons 1 0 2022-07-01 22:15:09.632
+!MESSAGE Boot LS startup time from start to initialized: 3114ms
+
+!ENTRY org.springframework.tooling.ls.eclipse.commons 1 0 2022-07-01 22:15:09.766
+!MESSAGE ClasspathListenerHandler addClasspathListener sts4.classpath.mgrybEdbisBatched = true
+
+!ENTRY org.springframework.tooling.ls.eclipse.commons 1 0 2022-07-01 22:15:09.770
+!MESSAGE Setting up ClasspathListenerManager
+
+!ENTRY org.springframework.tooling.ls.eclipse.commons 1 0 2022-07-01 22:15:09.772
+!MESSAGE Scheduling initial event for all projects ...
+
+!ENTRY org.springframework.tooling.ls.eclipse.commons 1 0 2022-07-01 22:15:09.773
+!MESSAGE Scheduling initial event for all projects DONE
+
+!ENTRY org.springframework.tooling.ls.eclipse.commons 1 0 2022-07-01 22:15:09.774
+!MESSAGE exists = true open = true => deleted = false
+
+!ENTRY org.springframework.tooling.ls.eclipse.commons 1 0 2022-07-01 22:15:09.774
+!MESSAGE ClasspathListenerHandler addClasspathListener sts4.classpath.mgrybEdb => OK
+
+!ENTRY org.springframework.tooling.ls.eclipse.commons 1 0 2022-07-01 22:15:09.784
+!MESSAGE classpath=130 entries
+
+!ENTRY org.springframework.tooling.ls.eclipse.commons 1 0 2022-07-01 22:15:09.790
+!MESSAGE buffering callback sts4.classpath.mgrybEdb CheapMart false 130
+
+!ENTRY org.springframework.tooling.ls.eclipse.commons 1 0 2022-07-01 22:15:09.791
+!MESSAGE executing callback sts4.classpath.mgrybEdb 1 batched events
+
+!ENTRY org.springframework.tooling.ls.eclipse.commons 1 0 2022-07-01 22:15:10.155
+!MESSAGE executing callback sts4.classpath.mgrybEdb SUCCESS [done]
