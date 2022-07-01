@@ -1,6 +1,7 @@
 package com.example.demo.model;
 
 import java.sql.Timestamp;
+import java.time.LocalDateTime;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -56,7 +57,7 @@ public class Product {
 	private String description;
 	
 	@Column(nullable= false)
-	private double price;
+	private Double price;
 	
 	@Column(nullable=false, length=100)
 	private String email;
@@ -84,33 +85,41 @@ public class Product {
 	private Set<Bidding> bidding=new HashSet<>();
 	
 	@Column(nullable=false)
-	private int isBidding;
+	private Integer isBidding;
 	
 	@Column(nullable=true)
-	private double minIncrementAmt;
+	private Double minIncrementAmt;
 	
 	@Column(nullable=true)
-	private double entryFees;
+	private Double entryFees;
 	
 	@Column(nullable=true)
-	private double incrementAmt;
+	private Double incrementAmt;
 	
 	@Column(nullable=true)
-	private double bidPrice;	
+	private Double bidPrice;	
 	
 	@Column(nullable=true)
-	private Timestamp startTime;
+	private LocalDateTime startTime;
 	
 	@Column(nullable=true)
-	private Timestamp endTime;
+	private LocalDateTime endTime;
 	
 	@Column(nullable = false)
 	private Timestamp createdAt=new Timestamp(System.currentTimeMillis());
 	
 	@Column(nullable = false,columnDefinition = "integer default 0")
-	private int status;
+	private Integer status=0;
 
 	
+	public Category getCategory() {
+		return category;
+	}
+
+	public void setCategory(Category category) {
+		this.category = category;
+	}
+
 	public Timestamp getCreatedAt() {
 		return createdAt;
 	}
@@ -163,43 +172,43 @@ public class Product {
 		this.minIncrementAmt = minIncrementAmt;
 	}
 
-	public double getEntryFees() {
+	public Double getEntryFees() {
 		return entryFees;
 	}
 
-	public void setEntryFees(double entryFees) {
+	public void setEntryFees(Double entryFees) {
 		this.entryFees = entryFees;
 	}
 
-	public double getIncrementAmt() {
+	public Double getIncrementAmt() {
 		return incrementAmt;
 	}
 
-	public void setIncrementAmt(double incrementAmt) {
+	public void setIncrementAmt(Double incrementAmt) {
 		this.incrementAmt = incrementAmt;
 	}
 
-	public double getBidPrice() {
+	public Double getBidPrice() {
 		return bidPrice;
 	}
 
-	public void setBidPrice(double bidPrice) {
+	public void setBidPrice(Double bidPrice) {
 		this.bidPrice = bidPrice;
 	}
 
-	public Timestamp getStartTime() {
+	public LocalDateTime getStartTime() {
 		return startTime;
 	}
 
-	public void setStartTime(Timestamp startTime) {
+	public void setStartTime(LocalDateTime startTime) {
 		this.startTime = startTime;
 	}
 
-	public Timestamp getEndTime() {
+	public LocalDateTime getEndTime() {
 		return endTime;
 	}
 
-	public void setEndTime(Timestamp endTime) {
+	public void setEndTime(LocalDateTime endTime) {
 		this.endTime = endTime;
 	}
 
@@ -262,12 +271,12 @@ public class Product {
 	}
 
 
-	public double getPrice() {
+	public Double getPrice() {
 		return price;
 	}
 
 
-	public void setPrice(double price) {
+	public void setPrice(Double price) {
 		this.price = price;
 	}
 
@@ -292,12 +301,12 @@ public class Product {
 		this.createdAt = createdAt;
 	}
 
-	public int getStatus() {
+	public Integer getStatus() {
 		return status;
 	}
 
 
-	public void setStatus(int status) {
+	public void setStatus(Integer status) {
 		this.status = status;
 	}
 	
@@ -309,11 +318,11 @@ public class Product {
 		this.order = order;
 	}
 	
-	public int getIsBidding() {
+	public Integer getIsBidding() {
 		return isBidding;
 	}
 
-	public void setIsBidding(int isBidding) {
+	public void setIsBidding(Integer isBidding) {
 		this.isBidding = isBidding;
 	}
 }

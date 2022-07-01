@@ -1,28 +1,40 @@
 package com.example.demo.web.dto;
 
-import java.sql.Timestamp;
+import java.time.LocalDateTime;
+
+import org.springframework.format.annotation.DateTimeFormat;
 
 public class ProductFormDto {
 
 	private Long id;
+	private Long user;
 	private Long category;
 	private Long subcategory;
-	private Long user;
 	private String name;
 	private String description;
-	private double price;
+	private Double price;
 	private String email;
 	private String pincode;
 	private String city;
 	private String state;
 	private String address;
-	private int isBidding;
-	private double minIncrementAmt;
-	private double entryFees;
-	private double incrementAmt;
-	private double bidPrice;
-	private Timestamp startTime;
-	private Timestamp endTime;
+	private Integer isBidding;
+	private Double minIncrementAmt;
+	private Double entryFees;
+	private Double incrementAmt;
+	private Double bidPrice;
+	private Integer status=0;
+	
+	public Integer getStatus() {
+		return status;
+	}
+	public void setStatus(Integer status) {
+		this.status = status;
+	}
+	@DateTimeFormat(pattern = "yyyy-MM-dd'T'HH:mm")
+	private LocalDateTime startTime;
+	@DateTimeFormat(pattern = "yyyy-MM-dd'T'HH:mm")
+	private LocalDateTime endTime;
 	
 	public Long getId() {
 		return id;
@@ -30,17 +42,17 @@ public class ProductFormDto {
 	public void setId(Long id) {
 		this.id = id;
 	}
-	public Long getSubcategory() {
-		return subcategory;
-	}
-	public void setSubcategory(Long subcategory) {
-		this.subcategory = subcategory;
-	}
 	public Long getUser() {
 		return user;
 	}
 	public void setUser(Long user) {
 		this.user = user;
+	}
+	public Long getSubcategory() {
+		return subcategory;
+	}
+	public void setSubcategory(Long subcategory) {
+		this.subcategory = subcategory;
 	}
 	public String getName() {
 		return name;
@@ -54,10 +66,10 @@ public class ProductFormDto {
 	public void setDescription(String description) {
 		this.description = description;
 	}
-	public double getPrice() {
+	public Double getPrice() {
 		return price;
 	}
-	public void setPrice(double price) {
+	public void setPrice(Double price) {
 		this.price = price;
 	}
 	public String getEmail() {
@@ -90,46 +102,46 @@ public class ProductFormDto {
 	public void setAddress(String address) {
 		this.address = address;
 	}
-	public int getIsBidding() {
+	public Integer getIsBidding() {
 		return isBidding;
 	}
-	public void setIsBidding(int isBidding) {
+	public void setIsBidding(Integer isBidding) {
 		this.isBidding = isBidding;
 	}
-	public double getMinIncrementAmt() {
+	public Double getMinIncrementAmt() {
 		return minIncrementAmt;
 	}
-	public void setMinIncrementAmt(double minIncrementAmt) {
+	public void setMinIncrementAmt(Double minIncrementAmt) {
 		this.minIncrementAmt = minIncrementAmt;
 	}
-	public double getEntryFees() {
+	public Double getEntryFees() {
 		return entryFees;
 	}
-	public void setEntryFees(double entryFees) {
+	public void setEntryFees(Double entryFees) {
 		this.entryFees = entryFees;
 	}
-	public double getIncrementAmt() {
+	public Double getIncrementAmt() {
 		return incrementAmt;
 	}
-	public void setIncrementAmt(double incrementAmt) {
+	public void setIncrementAmt(Double incrementAmt) {
 		this.incrementAmt = incrementAmt;
 	}
-	public double getBidPrice() {
+	public Double getBidPrice() {
 		return bidPrice;
 	}
-	public void setBidPrice(double bidPrice) {
+	public void setBidPrice(Double bidPrice) {
 		this.bidPrice = bidPrice;
 	}
-	public Timestamp getStartTime() {
+	public LocalDateTime getStartTime() {
 		return startTime;
 	}
-	public void setStartTime(Timestamp startTime) {
+	public void setStartTime(LocalDateTime startTime) {
 		this.startTime = startTime;
 	}
-	public Timestamp getEndTime() {
+	public LocalDateTime getEndTime() {
 		return endTime;
 	}
-	public void setEndTime(Timestamp endTime) {
+	public void setEndTime(LocalDateTime endTime) {
 		this.endTime = endTime;
 	}
 	public Long getCategory() {

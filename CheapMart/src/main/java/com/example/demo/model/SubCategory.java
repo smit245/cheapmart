@@ -36,7 +36,7 @@ public class SubCategory {
 	
 	
 	@Column(nullable = false,columnDefinition = "integer default 0")
-	private int status;
+	private Integer status;
 	
 	public Long getId() {
 		return id;
@@ -66,11 +66,11 @@ public class SubCategory {
 		this.name = name;
 	}
 
-	public int getStatus() {
+	public Integer getStatus() {
 		return status;
 	}
 
-	public void setStatus(int status) {
+	public void setStatus(Integer status) {
 		this.status = status;
 	}
 	

@@ -39,7 +39,7 @@ public class Bidding {
 	private Timestamp createdAt=new Timestamp(System.currentTimeMillis());
 	
 	@Column(nullable = false,columnDefinition = "integer default 0")
-	private int status;
+	private Integer status;
 	
 	public Long getId() {
 		return id;
@@ -65,11 +65,11 @@ public class Bidding {
 		this.user = user;
 	}
 
-	public int getStatus() {
+	public Integer getStatus() {
 		return status;
 	}
 
-	public void setStatus(int status) {
+	public void setStatus(Integer status) {
 		this.status = status;
 	}
 

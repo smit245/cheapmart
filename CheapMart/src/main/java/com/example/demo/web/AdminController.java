@@ -31,6 +31,7 @@ import com.example.demo.model.Category;
 import com.example.demo.model.Product;
 import com.example.demo.model.SubCategory;
 import com.example.demo.model.User;
+import com.example.demo.repos.ProductRepository;
 import com.example.demo.service.AdminService;
 import com.example.demo.service.CategoryService;
 import com.example.demo.service.OrderService;
@@ -61,6 +62,9 @@ public class AdminController {
 	
 	@Autowired
 	private ProductService productService;
+	
+	@Autowired
+	private ProductRepository productRepository;
 	
 	
 	
@@ -182,7 +186,7 @@ public class AdminController {
 			else
 				product.setStatus(0);
 			
-			productService.saveProduct(product);
+			productRepository.save(product);
 			model.addAttribute("product", productService.getAllProductInfo());
 			//userService.delete(userId);
 			 return "redirect:/admin/AdminProduct";

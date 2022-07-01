@@ -30,7 +30,7 @@ public class Order {
 	private User user;
 	
 	@Column(nullable = false)
-	private double price;
+	private Double price;
 	
 	@Column(nullable = false)
 	private String pincode;
@@ -51,5 +51,5 @@ public class Order {
 	private String paymentMode;
 	
 	@Column(nullable  = false,columnDefinition = "integer default 0")
-	private int status;
+	private Integer status;
 }

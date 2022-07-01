@@ -262,3 +262,14 @@ if (window.location.href.indexOf("?success") > -1) {
         width: 300
     });
 }
+
+if (window.location.href.indexOf("?addproduct") > -1) {
+     $.bootstrapGrowl('<h4><strong>Success...</strong></h4> <p>Product Added Successfully</p>', {
+        type: "success",
+        delay: 5000,
+        allow_dismiss: true,
+        offset: {from: 'top', amount: 20},
+        align: "center",
+        width: 300
+    });
+}

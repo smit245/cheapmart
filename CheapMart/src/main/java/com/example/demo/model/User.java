@@ -62,7 +62,7 @@ public class User {
 	private String password;
 	
 	@Column(nullable  = true,columnDefinition = "integer default 0")
-	private int status;
+	private Integer status;
 
 	public Set<Product> getProduct() {
 		return product;
@@ -139,10 +139,10 @@ public class User {
 	public void setGender(String gender) {
 		this.gender = gender;
 	}
-	public int getStatus() {
+	public Integer getStatus() {
 		return status;
 	}
-	public void setStatus(int status) {
+	public void setStatus(Integer status) {
 		this.status = status;
 	}
 }

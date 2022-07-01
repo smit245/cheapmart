@@ -8,12 +8,23 @@ import org.springframework.stereotype.Service;
 
 import com.example.demo.model.Product;
 import com.example.demo.repos.ProductRepository;
+import com.example.demo.repos.UserRepository;
+import com.example.demo.web.dto.ProductFormDto;
 
 @Service
 public class ProductServiceImpl implements ProductService {
 
 	@Autowired
+	private CategoryService categoryService;
+	
+	@Autowired
+	private SubCategoryService subCategoryService;
+	
+	@Autowired
 	private ProductRepository productRepository;
+	
+	@Autowired
+	private UserService userService;
 	
 	@Override
 	public List<Product> getAllProductInfo() {
@@ -36,8 +47,27 @@ public class ProductServiceImpl implements ProductService {
 	}
 
 	@Override
-	public void saveProduct(Product product) {
-		this.productRepository.save(product);
+	public Product saveProduct(ProductFormDto productFormDto) {
+		Product product=new Product();
+		product.setName(productFormDto.getName());
+		product.setPrice(productFormDto.getPrice());
+		product.setCategory(categoryService.getCategoryById(productFormDto.getCategory()));
+		product.setSubcategory(subCategoryService.getSubCategoryById(productFormDto.getSubcategory()));
+		product.setDescription(productFormDto.getDescription());
+		product.setAddress(productFormDto.getAddress());
+		product.setEmail(productFormDto.getEmail());
+		product.setCity(productFormDto.getCity());
+		product.setPincode(productFormDto.getPincode());
+		product.setState(productFormDto.getState());
+		product.setStartTime(productFormDto.getStartTime());
+		product.setEndTime(productFormDto.getEndTime());
+		product.setEntryFees(productFormDto.getEntryFees());
+		product.setIncrementAmt(productFormDto.getIncrementAmt());
+		product.setIsBidding(productFormDto.getIsBidding());
+		product.setMinIncrementAmt(productFormDto.getMinIncrementAmt());
+		product.setUser(userService.getUserbyId(productFormDto.getUser()));
+		product.setStatus(productFormDto.getStatus());
+		return productRepository.save(product);
 		
 	}
 

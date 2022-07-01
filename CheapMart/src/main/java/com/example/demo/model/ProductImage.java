@@ -27,7 +27,7 @@ public class ProductImage {
 	private String path;
 	
 	@Column(nullable = false,columnDefinition = "integer default 0")
-	private int status;
+	private Integer status;
 
 	public Product getProduct() {
 		return product;
@@ -49,11 +49,11 @@ public class ProductImage {
 		this.path = path;
 	}
 
-	public int getStatus() {
+	public Integer getStatus() {
 		return status;
 	}
 
-	public void setStatus(int status) {
+	public void setStatus(Integer status) {
 		this.status = status;
 	}
 }

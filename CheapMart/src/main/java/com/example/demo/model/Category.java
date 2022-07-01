@@ -36,7 +36,7 @@ public class Category {
 	private String image;
 	
 	@Column(nullable = false,columnDefinition = "integer default 0")
-	private int status;
+	private Integer status;
 	
 	public Set<SubCategory> getSubcategory() {
 		return subcategory;
@@ -62,11 +62,11 @@ public class Category {
 		this.image = image;
 	}
 
-	public int getStatus() {
+	public Integer getStatus() {
 		return status;
 	}
 
-	public void setStatus(int status) {
+	public void setStatus(Integer status) {
 		this.status = status;
 	}
 

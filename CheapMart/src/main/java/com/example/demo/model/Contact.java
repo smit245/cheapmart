@@ -27,7 +27,7 @@ public class Contact {
 	private String address;
 	
 	@Column(nullable = false,columnDefinition = "integer default 0")
-	private int status;
+	private Integer status;
 	
 	public String getName() {
 		return name;
@@ -61,11 +61,11 @@ public class Contact {
 		this.address = address;
 	}
 
-	public int getStatus() {
+	public Integer getStatus() {
 		return status;
 	}
 
-	public void setStatus(int status) {
+	public void setStatus(Integer status) {
 		this.status = status;
 	}
 

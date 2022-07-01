@@ -8,7 +8,7 @@ import org.springframework.security.core.userdetails.User;
 public class UserSession extends User{
 
 	private static final long serialVersionUID = 1L;
-	private long id;
+	private Long id;
 	private String name;
 	private String pincode;
 	
@@ -25,11 +25,11 @@ public class UserSession extends User{
 		return serialVersionUID;
 	}
 
-	public long getId() {
+	public Long getId() {
 		return id;
 	}
 
-	public void setId(long id) {
+	public void setId(Long id) {
 		this.id = id;
 	}
 

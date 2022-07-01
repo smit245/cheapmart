@@ -25,7 +25,7 @@
 							<h1>Add Product To Sell</h1>
 						</div>
 						<!-- /page_header -->
-						<form action="/addproduct" method="post" th:object="${productForm}">
+						<form action="/addproducts" method="post" th:object="${productFormDto}" enctype="multipart/form-data">
 							<div class="row justify-content-center">
 								<div class="col-xl-6 col-lg-6 col-md-8">
 									<div class="box_account">
@@ -33,30 +33,31 @@
 										<div class="form_container">
 											
 											<div class="form-group">
-												<input type="text" class="form-control" name="name" th:field="*{name}" id="pname" placeholder="Product Name...">
+												<input type="text" class="form-control" name="name" th:field="*{name}" id="pname" placeholder="Product Name..." required>
 											</div>
 											<div class="form-group">
-												<input type="text" class="form-control" name="price" id="price" th:field="*{price}" placeholder="Product Price...">
+												<input type="text" class="form-control" name="price" id="price" th:field="*{price}" value="" placeholder="Product Price..." required>
+												
 											</div>
 											<div class="form-group">
-												<select name="category" id="category" class="form-control" th:field="*{category}">
-													<option selected value="">--Select Category--</option>
+												<select name="category" id="category" class="form-control" th:field="*{category}" required>
+													<option value="" selected>--Select Category--</option>
 													<option th:each="category : ${categories}" th:if="${#lists.size(category.subcategory)>0}" th:value="${category.id}" th:text="${category.name}"></option>
 												</select>
 											</div>
 											<div class="form-group">
-												<select name="subcategory" id="subcategory" class="form-control" th:field="*{subcategory}">
-													<option selected disabled>--Select Sub Category--</option>
+												<select name="subcategory" id="subcategory" class="form-control" th:field="*{subcategory}" required>
+													<option selected value="">--Select Sub Category--</option>
 												</select>
 											</div>
 											<div class="form-group">
-												<textarea class="form-control" name="description" id="description" rows="5" style="height:auto" placeholder="Enter Product Full Spec Including How Much Old is it?" th:field="*{description}"></textarea>
+												<textarea class="form-control" name="description" id="description" rows="5" style="height:auto" placeholder="Enter Product Full Spec Including How Much Old is it?" th:field="*{description}" required></textarea>
 											</div>
 											
 											<div class="form-group">
 												<label class="col-md-3 control-label">Select Images</label>
 												<div class="col-md-12">
-													<input type="file" class="form-control" name="images" id="images" accept="image/*" multiple>
+													<input type="file" class="form-control" name="images[]" id="images" accept="image/*" multiple required>
 													<small class="float-right pt-2">Select All The Images For Your Product</small>
 												</div>
 											</div>
@@ -65,12 +66,12 @@
 												
 												<div class="col-md-6">
 													<label class="col-md-6 control-label">Is it Auction?</label>
-													<label class="container_radio" style="display: inline-block; margin-right: 15px;">Yes
-														<input type="radio" name="isBidding" value="1" >
+													<label class="container_radio" style="display: inline-block; margin-right: 15px;" >Yes
+														<input type="radio" name="isBidding" value="1" th:field="*{isBidding}">
 														<span class="checkmark"></span>
 													</label>
 													<label class="container_radio" style="display: inline-block;">No
-														<input type="radio" name="isBidding" value="0" checked>
+														<input type="radio" name="isBidding" value="0" th:field="*{isBidding}" th:checked="true">
 														<span class="checkmark"></span>
 													</label>
 												</div>
@@ -80,22 +81,22 @@
 												<hr>
 												<div class="row no-gutters">
 													<div class="form-group">
-														<input type="text" class="form-control" name="minIncrementAmt" id="minIncrementAmt" placeholder="Minimum Increament Per Bid">
+														<input type="text" class="form-control" name="minIncrementAmt" id="minIncrementAmt" th:field="*{minIncrementAmt}" placeholder="Minimum Increament Per Bid">
 													</div>
 													<div class="form-group">
-														<input type="text" class="form-control" name="entryFees" id="entryFees" placeholder="Entry Fees For Entering Auction">
+														<input type="text" class="form-control" name="entryFees" id="entryFees" th:field="*{entryFees}" placeholder="Entry Fees For Entering Auction">
 														<small class="float-right pt-2">This is to prevent uninterested bids</small>
 													</div>
 													<div class="form-group">
 														<label class="col-md-3 control-label">Auction Start Time</label>
 														<div class="col-md-12">
-															<input type="datetime-local" class="form-control" name="startTime" id="startTime" >
+															<input type="datetime-local" class="form-control" name="startTime" id="startTime" th:field="*{startTime}" >
 														</div>
 													</div>
 													<div class="form-group">
 														<label class="col-md-3 control-label">Auction End Time</label>
 														<div class="col-md-12">
-															<input type="datetime-local" class="form-control" name="endTime" id="endTime" >
+															<input type="datetime-local" class="form-control" name="endTime" id="endTime" th:field="*{endTime}">
 														</div>
 													</div>
 												</div>
@@ -114,20 +115,20 @@
 										<h3>Address Details</h3>
 										<div class="form_container">
 											<div class="form-group">
-												<input type="text" class="form-control" name="email" id="pemail" placeholder="Email*">
+												<input type="text" class="form-control" name="email" id="pemail" placeholder="Email*" th:field="*{email}" required>
 											</div>
 											<div class="form-group">
-												<input type="text" class="form-control pincode" name="pincode" id="ppincode" placeholder="Postal Code*">
+												<input type="text" class="form-control pincode" name="pincode" id="ppincode" placeholder="Postal Code*" th:field="*{pincode}" required>
 											</div>
 											<div class="row no-gutters">
 												<div class="col-6 pr-1">
 													<div class="form-group">
-														<input type="text" class="form-control city" name="city" id="pcity" placeholder="City..." readonly>
+														<input type="text" class="form-control city" name="city" id="pcity" placeholder="City..." th:field="*{city}" readonly required>
 													</div>
 												</div>
 												<div class="col-6 pl-1">
 													<div class="form-group">
-														<input type="text" class="form-control state" name="state" id="pstate" placeholder="Starte...">
+														<input type="text" class="form-control state" name="state" id="pstate" placeholder="State..." th:field="*{state}" required>
 													</div>
 												</div>
 											</div>
@@ -135,7 +136,7 @@
 											<!-- /row -->
 
 											<div class="form-group">
-												<textarea class="form-control" name="address" id="paddress" rows="5" style="height:auto" placeholder="Enter Full Address..."></textarea>
+												<textarea class="form-control" name="address" id="paddress" rows="5" style="height:auto" placeholder="Enter Full Address..." th:field="*{address}" required></textarea>
 											</div>
 											<!-- <div class="form-group">
 												<label class="container_check">Accept <a href="#0">Terms and conditions</a>
@@ -168,6 +169,38 @@
 				    }else{
 				    	$(".yes").show();
 				    }
+				});
+				$('#category').change(function(){
+					var id=$(this).val()
+					$.ajax({
+				        url:"/getcategory",
+				        method:"get",
+				        data:{id:id},
+				        error: function(data){
+							console.log(data);
+							$.bootstrapGrowl('<h4><strong>Unsuccess!!!</strong></h4> <p>'+data.statusText+'</p>', {
+				                type: "danger",
+				                delay: 3000,
+				                allow_dismiss: true,
+				                offset: {from: 'top', amount: 20},
+				                align: "center",
+				                width: 400
+				            });
+						    
+						},
+				        success:function(resp){
+							console.log(resp);
+							
+							var options='';
+				           	for(i=0;i<resp.subcategory.length;i++){
+				           		subcat=resp.subcategory[i]
+				           		options += "<option value='"+subcat.id+"'>"+subcat.name+"</option>";
+				           	}
+				           	
+				           	$('#subcategory').empty().append(options)
+				           
+				        }
+				    });
 				});
 			</script>
 			
