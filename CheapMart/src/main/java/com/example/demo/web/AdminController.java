@@ -28,10 +28,13 @@ import org.springframework.web.servlet.support.RequestContextUtils;
 import com.example.demo.filehandle.FileUploadUtil;
 import com.example.demo.model.Admin;
 import com.example.demo.model.Category;
+import com.example.demo.model.Product;
 import com.example.demo.model.SubCategory;
 import com.example.demo.model.User;
 import com.example.demo.service.AdminService;
 import com.example.demo.service.CategoryService;
+import com.example.demo.service.OrderService;
+import com.example.demo.service.ProductService;
 import com.example.demo.service.SubCategoryService;
 import com.example.demo.service.UserService;
 import com.example.demo.web.dto.AdminLoginDto;
@@ -52,6 +55,12 @@ public class AdminController {
 	
 	@Autowired
 	private AdminService adminService;
+	
+	@Autowired
+	private OrderService orderService;
+	
+	@Autowired
+	private ProductService productService;
 	
 	
 	
@@ -155,15 +164,37 @@ public class AdminController {
 	public String AdminProduct(Model model,HttpServletRequest request) {
 		if(isAuthenticated(request)) {
 			model.addAttribute("title", "Products");
+			model.addAttribute("product", productService.getAllProductInfo());
 			return "admin/AdminProduct";
 		}
 		return "redirect:/admin/login?denied=true";
 		
 	}
+	@GetMapping("/admin/BlockOrUnblockProduct")
+	public String AdminBlockProduct(@RequestParam long productId , Model model,HttpServletRequest request) 
+	{
+		
+		if(isAuthenticated(request)) {
+			Product product = productService.getProductbyId(productId);
+			
+			if(product.getStatus() == 0)
+				product.setStatus(1);
+			else
+				product.setStatus(0);
+			
+			productService.saveProduct(product);
+			model.addAttribute("product", productService.getAllProductInfo());
+			//userService.delete(userId);
+			 return "redirect:/admin/AdminProduct";
+		}
+		return "redirect:/admin/login?denied=true";
+	}
+	
 	@GetMapping("/admin/AdminOrders")
 	public String AdminOrders(Model model,HttpServletRequest request) {
 		if(isAuthenticated(request)) {
 			model.addAttribute("title", "Orders");
+			model.addAttribute("orderr", orderService.getAllOrderInfo());
 			return "admin/AdminOrders";
 		}
 		return "redirect:/admin/login?denied=true";

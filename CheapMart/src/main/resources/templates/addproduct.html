@@ -25,7 +25,7 @@
 							<h1>Add Product To Sell</h1>
 						</div>
 						<!-- /page_header -->
-						<form action="/addproduct" method="post">
+						<form action="/addproduct" method="post" th:object="${productForm}">
 							<div class="row justify-content-center">
 								<div class="col-xl-6 col-lg-6 col-md-8">
 									<div class="box_account">
@@ -33,24 +33,24 @@
 										<div class="form_container">
 											
 											<div class="form-group">
-												<input type="text" class="form-control" name="name" id="pname" placeholder="Product Name...">
+												<input type="text" class="form-control" name="name" th:field="*{name}" id="pname" placeholder="Product Name...">
 											</div>
 											<div class="form-group">
-												<input type="text" class="form-control" name="price" id="price" placeholder="Product Price...">
+												<input type="text" class="form-control" name="price" id="price" th:field="*{price}" placeholder="Product Price...">
 											</div>
 											<div class="form-group">
-												<select name="category" id="category" class="form-control">
+												<select name="category" id="category" class="form-control" th:field="*{category}">
 													<option selected value="">--Select Category--</option>
 													<option th:each="category : ${categories}" th:if="${#lists.size(category.subcategory)>0}" th:value="${category.id}" th:text="${category.name}"></option>
 												</select>
 											</div>
 											<div class="form-group">
-												<select name="subCategory" id="subCategory" class="form-control">
+												<select name="subcategory" id="subcategory" class="form-control" th:field="*{subcategory}">
 													<option selected disabled>--Select Sub Category--</option>
 												</select>
 											</div>
 											<div class="form-group">
-												<textarea class="form-control" name="description" id="description" rows="5" style="height:auto" placeholder="Enter Product Full Spec Including How Much Old is it?"></textarea>
+												<textarea class="form-control" name="description" id="description" rows="5" style="height:auto" placeholder="Enter Product Full Spec Including How Much Old is it?" th:field="*{description}"></textarea>
 											</div>
 											
 											<div class="form-group">

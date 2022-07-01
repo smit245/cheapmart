@@ -6,7 +6,6 @@ public class ProductFormDto {
 
 	private Long id;
 	private Long category;
-	
 	private Long subcategory;
 	private Long user;
 	private String name;

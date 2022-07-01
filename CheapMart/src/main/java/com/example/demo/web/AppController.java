@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 
 import com.example.demo.model.Category;
 import com.example.demo.service.CategoryService;
-
+import com.example.demo.web.dto.ProductFormDto;
 import com.example.demo.web.dto.UserRegistrationDto;
 
 
@@ -56,7 +56,7 @@ public class AppController {
 	}
 	
 	@GetMapping("/addproducts")
-	public String viewAddProductPage(Model model) {
+	public String viewAddProductPage(@ModelAttribute("productFormDto") ProductFormDto productFormDto,Model model) {
 		
 		model.addAttribute("title", "Add Product");
 		return "addproduct";
