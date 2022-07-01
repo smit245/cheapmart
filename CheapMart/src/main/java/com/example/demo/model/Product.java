@@ -53,20 +53,26 @@ public class Product {
 	@Column(nullable= false)
 	private double price;
 	
-	@Column(nullable = false)
+	@Column(nullable=false, length=100)
+	private String email;
+	
+	@Column(nullable = false,  length=6)
 	private String pincode;
 	
-	@Column(nullable = false)
+	@Column(nullable = false,length=50)
 	private String city;
 	
-	@Column(nullable = false)
+	@Column(nullable = false,length=50)
 	private String state;
+	
+	@Column(nullable=false,length=500)
+	private String address;
 	
 	
 	//Bidding Details
 	@ManyToOne
 	@JoinColumns(foreignKey = @ForeignKey(name="FK_bidder_product"),value= {
-			@JoinColumn(referencedColumnName = "id",name="bidderid",nullable=false)})
+			@JoinColumn(referencedColumnName = "id",name="bidderid",nullable=true)})
 	private User bidder;
 	
 	@OneToMany(mappedBy = "product",fetch=FetchType.EAGER)
@@ -75,8 +81,6 @@ public class Product {
 	@Column(nullable=false)
 	private int isBidding;
 	
-	
-
 	@Column(nullable=true)
 	private double minIncrementAmt;
 	
@@ -262,6 +266,26 @@ public class Product {
 		this.price = price;
 	}
 
+
+	public String getEmail() {
+		return email;
+	}
+
+	public void setEmail(String email) {
+		this.email = email;
+	}
+
+	public String getAddress() {
+		return address;
+	}
+
+	public void setAddress(String address) {
+		this.address = address;
+	}
+
+	public void setCreatedAt(Timestamp createdAt) {
+		this.createdAt = createdAt;
+	}
 
 	public int getStatus() {
 		return status;

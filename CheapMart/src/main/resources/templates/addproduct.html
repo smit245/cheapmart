@@ -33,14 +33,14 @@
 										<div class="form_container">
 											
 											<div class="form-group">
-												<input type="text" class="form-control" name="name" id="name" placeholder="Product Name...">
+												<input type="text" class="form-control" name="name" id="pname" placeholder="Product Name...">
 											</div>
 											<div class="form-group">
 												<input type="text" class="form-control" name="price" id="price" placeholder="Product Price...">
 											</div>
 											<div class="form-group">
 												<select name="category" id="category" class="form-control">
-													<option selected disabled>--Select Category--</option>
+													<option selected value="">--Select Category--</option>
 													<option th:each="category : ${categories}" th:if="${#lists.size(category.subcategory)>0}" th:value="${category.id}" th:text="${category.name}"></option>
 												</select>
 											</div>
@@ -76,62 +76,31 @@
 												</div>
 											</div>
 											<div class="yes box" style="display: none;">
+												<small class="float-right pt-2">Product Price will be Your Starting Bid Price</small>
+												<hr>
 												<div class="row no-gutters">
-													<div class="col-6 pr-1">
-														<div class="form-group">
-															<input type="text" class="form-control" placeholder="Name*">
+													<div class="form-group">
+														<input type="text" class="form-control" name="minIncrementAmt" id="minIncrementAmt" placeholder="Minimum Increament Per Bid">
+													</div>
+													<div class="form-group">
+														<input type="text" class="form-control" name="entryFees" id="entryFees" placeholder="Entry Fees For Entering Auction">
+														<small class="float-right pt-2">This is to prevent uninterested bids</small>
+													</div>
+													<div class="form-group">
+														<label class="col-md-3 control-label">Auction Start Time</label>
+														<div class="col-md-12">
+															<input type="datetime-local" class="form-control" name="startTime" id="startTime" >
 														</div>
 													</div>
-													<div class="col-6 pl-1">
-														<div class="form-group">
-															<input type="text" class="form-control" placeholder="Last Name*">
-														</div>
-													</div>
-													<div class="col-12">
-														<div class="form-group">
-															<input type="text" class="form-control" placeholder="Full Address*">
-														</div>
-													</div>
-													<div class="col-12">
-														<div class="form-group">
-															<input type="file" class="form-control" name="files" placeholder="Add File" multiple="multiple">
-														</div>
-													</div>
-												</div>
-												<!-- /row -->
-												<div class="row no-gutters">
-													<div class="col-6 pr-1">
-														<div class="form-group">
-															<input type="text" class="form-control" placeholder="City*">
-														</div>
-													</div>
-													<div class="col-6 pl-1">
-														<div class="form-group">
-															<input type="text" class="form-control" placeholder="Postal Code*">
+													<div class="form-group">
+														<label class="col-md-3 control-label">Auction End Time</label>
+														<div class="col-md-12">
+															<input type="datetime-local" class="form-control" name="endTime" id="endTime" >
 														</div>
 													</div>
 												</div>
 												<!-- /row -->
 												
-												<div class="row no-gutters">
-													<div class="col-6 pr-1">
-														<div class="form-group">
-															<div class="custom-select-form">
-																<select class="wide add_bottom_10" name="country" id="country">
-																		<option value="" selected>Country*</option>
-																		<option value="Europe">Europe</option>
-																		<option value="United states">United states</option>
-																		<option value="Asia">Asia</option>
-																</select>
-															</div>
-														</div>
-													</div>
-													<div class="col-6 pl-1">
-														<div class="form-group">
-															<input type="text" class="form-control" placeholder="Telephone *">
-														</div>
-													</div>
-												</div>
 												<!-- /row -->
 												
 											</div>
@@ -143,22 +112,39 @@
 								</div>
 								<div class="col-xl-6 col-lg-6 col-md-8">
 									<div class="box_account">
-										<h3>Other Details</h3> <small class="float-right pt-2">* Required Fields</small>
+										<h3>Other Details</h3>
 										<div class="form_container">
 											<div class="form-group">
-												<input type="email" class="form-control" name="email" id="email_2" placeholder="Email*">
+												<input type="text" class="form-control" name="email" id="pemail" placeholder="Email*">
 											</div>
 											<div class="form-group">
-												<input type="password" class="form-control" name="password_in_2" id="password_in_2" value="" placeholder="Password*">
+												<input type="text" class="form-control pincode" name="pincode" id="ppincode" placeholder="Postal Code*">
+											</div>
+											<div class="row no-gutters">
+												<div class="col-6 pr-1">
+													<div class="form-group">
+														<input type="text" class="form-control city" name="city" id="pcity" placeholder="City..." readonly>
+													</div>
+												</div>
+												<div class="col-6 pl-1">
+													<div class="form-group">
+														<input type="text" class="form-control state" name="state" id="pstate" placeholder="Starte...">
+													</div>
+												</div>
 											</div>
 											
+											<!-- /row -->
+
 											<div class="form-group">
+												<textarea class="form-control" name="address" id="paddress" rows="5" style="height:auto" placeholder="Enter Full Address..."></textarea>
+											</div>
+											<!-- <div class="form-group">
 												<label class="container_check">Accept <a href="#0">Terms and conditions</a>
 													<input type="checkbox">
 													<span class="checkmark"></span>
 												</label>
-											</div>
-											<div class="text-center"><input type="submit" value="Register" class="btn_1 full-width"></div>
+											</div> -->
+											<div class="text-center"><input type="submit" value="Click To Sell" class="btn_1 full-width"></div>
 										</div>
 										<!-- /form_container -->
 									</div>
