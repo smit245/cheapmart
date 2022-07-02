@@ -236,6 +236,7 @@ public class AdminController {
 		
 		String image = String.valueOf(System.currentTimeMillis())+StringUtils.cleanPath(multipartFile.getOriginalFilename());
 		categoryFormDto.setImage(image);
+		categoryFormDto.setStatus(0);
 		categoryService.save(categoryFormDto);
 		String uploadDir=Paths.get("src/main/resources/static/admin/img/category/").toAbsolutePath().toString();
 		FileUploadUtil.saveFile(uploadDir, image, multipartFile);
@@ -248,6 +249,7 @@ public class AdminController {
 	@ResponseBody
 	public Category editCategory(@RequestParam("id") long categoryId) {
 		Category category=categoryService.getCategoryById(categoryId);
+		category.setSubcategory(null);
 		return category;
 	}
 	
@@ -310,9 +312,14 @@ public class AdminController {
 	
 	@GetMapping("/admin/editsubcategory")
 	@ResponseBody
-	public SubCategory editSubCategory(@RequestParam("id") long subCategoryId) {
+	public SubCategoryFormDto editSubCategory(@RequestParam("id") long subCategoryId) {
 		SubCategory subCategory=subCategoryService.getSubCategoryById(subCategoryId);
-		return subCategory;
+		SubCategoryFormDto subCategoryFormDto=new SubCategoryFormDto();
+		subCategoryFormDto.setCategory(subCategory.getCategory().getId());
+		subCategoryFormDto.setId(subCategory.getId());
+		subCategoryFormDto.setName(subCategory.getName());
+		subCategoryFormDto.setStatus(subCategory.getStatus());
+		return subCategoryFormDto;
 	}
 	
 	@PostMapping("/admin/updatesubcategory")

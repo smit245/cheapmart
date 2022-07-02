@@ -3,7 +3,7 @@ package com.example.demo.web;
 import java.io.IOException;
 import java.nio.file.Paths;
 import java.util.List;
-
+import java.util.Set;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
@@ -25,8 +25,10 @@ import com.example.demo.model.ProductImage;
 import com.example.demo.service.CategoryService;
 import com.example.demo.service.ProductImageService;
 import com.example.demo.service.ProductService;
+import com.example.demo.service.SubCategoryService;
 import com.example.demo.session.UserSession;
 import com.example.demo.web.dto.ProductFormDto;
+import com.example.demo.web.dto.SubCategoryFormDto;
 import com.example.demo.web.dto.UserRegistrationDto;
 
 
@@ -41,6 +43,9 @@ public class AppController {
 	
 	@Autowired
 	ProductImageService productImageService;
+	
+	@Autowired
+	SubCategoryService subCategoryService;
 	
 	
 	
@@ -107,10 +112,10 @@ public class AppController {
 		return "redirect:/?addprodduct";
 	}
 	
-	@GetMapping("/getcategory")
 	@ResponseBody
-	public Category getCategory(@RequestParam("id") long id) {
-		Category category=categoryService.getCategoryById(id);
-		return category;
+	@GetMapping("/getcategory")
+	public Set<SubCategoryFormDto> getSubCategory(@RequestParam("id") long id) {
+		Set<SubCategoryFormDto> subCategory=subCategoryService.getSubCategoryByCategoryId(id);
+		return subCategory;
 	}
 }

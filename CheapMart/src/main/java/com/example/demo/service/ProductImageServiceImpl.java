@@ -16,6 +16,7 @@ public class ProductImageServiceImpl implements ProductImageService {
 	
 	@Override
 	public ProductImage saveProductImage(ProductImage productImage) {
+		productImage.setStatus(0);
 		return productImageRepository.save(productImage);
 	}
 

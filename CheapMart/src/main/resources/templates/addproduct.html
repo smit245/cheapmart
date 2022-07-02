@@ -192,8 +192,8 @@
 							console.log(resp);
 							
 							var options='';
-				           	for(i=0;i<resp.subcategory.length;i++){
-				           		subcat=resp.subcategory[i]
+				           	for(i=0;i<resp.length;i++){
+				           		subcat=resp[i]
 				           		options += "<option value='"+subcat.id+"'>"+subcat.name+"</option>";
 				           	}
 				           	

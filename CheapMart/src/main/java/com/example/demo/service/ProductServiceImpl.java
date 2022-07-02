@@ -8,7 +8,6 @@ import org.springframework.stereotype.Service;
 
 import com.example.demo.model.Product;
 import com.example.demo.repos.ProductRepository;
-import com.example.demo.repos.UserRepository;
 import com.example.demo.web.dto.ProductFormDto;
 
 @Service
@@ -66,7 +65,7 @@ public class ProductServiceImpl implements ProductService {
 		product.setIsBidding(productFormDto.getIsBidding());
 		product.setMinIncrementAmt(productFormDto.getMinIncrementAmt());
 		product.setUser(userService.getUserbyId(productFormDto.getUser()));
-		product.setStatus(productFormDto.getStatus());
+		product.setStatus(0);
 		return productRepository.save(product);
 		
 	}

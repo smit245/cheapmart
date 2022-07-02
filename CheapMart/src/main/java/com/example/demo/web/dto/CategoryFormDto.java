@@ -6,6 +6,7 @@ public class CategoryFormDto {
 	private String name;
 	private String image;
 	private int status;
+
 	
 	public long getId() {
 		return id;
