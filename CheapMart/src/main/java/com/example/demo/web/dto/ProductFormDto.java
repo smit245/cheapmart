@@ -19,7 +19,7 @@ public class ProductFormDto {
 	private String state;
 	private String address;
 	private Integer isBidding;
-	private Double minIncrementAmt;
+	private Double minIncrementAmt=0.0;
 	private Double entryFees;
 	private Double incrementAmt;
 	private Double bidPrice;

@@ -20,12 +20,15 @@ import org.springframework.web.multipart.MultipartFile;
 
 import com.example.demo.filehandle.FileUploadUtil;
 import com.example.demo.model.Category;
+import com.example.demo.model.Order;
 import com.example.demo.model.Product;
 import com.example.demo.model.ProductImage;
 import com.example.demo.service.CategoryService;
+import com.example.demo.service.OrderService;
 import com.example.demo.service.ProductImageService;
 import com.example.demo.service.ProductService;
 import com.example.demo.service.SubCategoryService;
+import com.example.demo.service.UserService;
 import com.example.demo.session.UserSession;
 import com.example.demo.web.dto.ProductFormDto;
 import com.example.demo.web.dto.SubCategoryFormDto;
@@ -46,6 +49,12 @@ public class AppController {
 	
 	@Autowired
 	SubCategoryService subCategoryService;
+	
+	@Autowired
+	UserService userService;
+	
+	@Autowired
+	OrderService orderService;
 	
 	@ModelAttribute("products")
 	public List<Product> products(){
@@ -120,5 +129,25 @@ public class AppController {
 	public Set<SubCategoryFormDto> getSubCategory(@RequestParam("id") long id) {
 		Set<SubCategoryFormDto> subCategory=subCategoryService.getSubCategoryByCategoryId(id);
 		return subCategory;
+	}
+	
+	@GetMapping("/order")
+	public String order(@RequestParam Long pid) {
+		Authentication auth=SecurityContextHolder.getContext().getAuthentication();
+		UserSession userSession=(UserSession)auth.getPrincipal();
+		Product product=productService.getProductbyId(pid);
+		Order order=new Order();
+		order.setAddress(product.getAddress());
+		order.setCity(product.getCity());
+		order.setPaymentId(null);
+		order.setPaymentMode("Cash");
+		order.setPincode(product.getPincode());
+		order.setPrice(product.getPrice());
+		order.setState(product.getState());
+		order.setUser(userService.getUserbyId(userSession.getId()));
+		order.setProduct(product);
+		order.setStatus(0);
+		orderService.saveOrder(order);
+		return "confirm";
 	}
 }

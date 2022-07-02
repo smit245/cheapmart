@@ -37,18 +37,18 @@ xmlns="http://www.w3.org/1999/xhtml"
 												<th>UID</th>
 												<th>Pincode</th>
 												<th>Price</th>
-												<th>Payment ID</th>
+												<th>Payment Mode</th>
 			
 											</tr>
 										</thead>
 										<tbody>
 											<tr th:each="Orders : ${orderr}">
 												<td><span th:text="${Orders.id}"></span></td>
-												<td><span th:text="${Orders.pid}"> </span></td>
-												<td><span th:text="${Orders.uid}"> </span></td>
+												<td><span th:text="${Orders.product.id}"> </span></td>
+												<td><span th:text="${Orders.user.id}"> </span></td>
 												<td><span th:text="${Orders.pincode}"> </span></td>
 												<td><span th:text="${Orders.price}"> </span></td>
-												<td><span th:text="${Orders.payment_id}"> </span></td>
+												<td><span th:text="${Orders.paymentMode}"> </span></td>
 											</tr>
 										</tbody>
 			
