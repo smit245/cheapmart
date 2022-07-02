@@ -47,7 +47,10 @@ public class AppController {
 	@Autowired
 	SubCategoryService subCategoryService;
 	
-	
+	@ModelAttribute("products")
+	public List<Product> products(){
+		return productService.getAllProductInfo();
+	}
 	
 	@ModelAttribute("user")
 	public UserRegistrationDto userRegistrationDto() {

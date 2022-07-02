@@ -43,15 +43,15 @@ xmlns="http://www.w3.org/1999/xhtml"
 											</tr>
 										</thead>
 										<tbody>
-											<tr th:each="products : ${product}">
-												<td><span th:text="${products.id}"></span></td>
-												<td><span th:text="${products.name}"> </span></td>
-												<td><span th:text="${products.city}"> </span></td>
-												<td><span th:text="${products.uid}"> </span></td>
-												<td><span th:text="${products.price}"> </span></td>
-												<td><span th:text="${products.description}"> </span></td>
-												<td th:if="${products.status} == 0"><a th:href="@{/admin/BlockOrUnblockProduct(productId=${products.id})}">HIDE</a></td>
-												<td th:if="${products.status} == 1"><a th:href="@{/admin/BlockOrUnblockProduct(productId=${products.id})}">UNHIDE</a></td>
+											<tr th:each="product : ${products}">
+												<td><span th:text="${product.id}"></span></td>
+												<td><span th:text="${product.name}"> </span></td>
+												<td><span th:text="${product.city}"> </span></td>
+												<td><span th:text="${product.user.id}"> </span></td>
+												<td><span th:text="${product.price}"> </span></td>
+												<td><span th:text="${product.description}"> </span></td>
+												<td th:if="${product.status} == 0"><a th:href="@{/admin/BlockOrUnblockProduct(productId=${product.id})}">Block</a></td>
+												<td th:if="${product.status} == 1"><a th:href="@{/admin/BlockOrUnblockProduct(productId=${product.id})}">Unblock</a></td>
 											</tr>
 										</tbody>
 			

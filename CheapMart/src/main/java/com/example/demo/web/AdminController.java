@@ -168,7 +168,7 @@ public class AdminController {
 	public String AdminProduct(Model model,HttpServletRequest request) {
 		if(isAuthenticated(request)) {
 			model.addAttribute("title", "Products");
-			model.addAttribute("product", productService.getAllProductInfo());
+			model.addAttribute("products", productService.getAllProductInfo());
 			return "admin/AdminProduct";
 		}
 		return "redirect:/admin/login?denied=true";
