@@ -80,7 +80,7 @@
 					<div class="row small-gutters mt-md-0 mt-sm-2">
 						<div class="col-sm-6" th:each="category : ${categories}">
 							<a href="#">
-								<img th:src="'/img/admin/img/category/'+${category.image}" th:data-src="'/admin/img/category/'+${category.image}" alt="" class="img-fluid lazy">
+								<img th:src="'/admin/img/category/'+${category.image}" th:data-src="'/admin/img/category/'+${category.image}" alt="" class="img-fluid lazy">
 								<div class="wrapper">
 									<h2 th:text="${category.name}"></h2>
 									<p>150+ Products</p>
@@ -115,9 +115,8 @@
 						<div class="grid_item">
 							<figure>
 								<!-- <span class="ribbon off">-30%</span> -->
-								<a href="product-detail-1.html">
-									
-									<img class="img-fluid lazy" th:each="pimage : ${product.productimage}" th:src="'/img/products/'+${pimage.path}" th:data-src="'/img/products/'+${pimage.path}" alt=""> 
+								<a href="product-detail-1.html" th:with="counter=0">
+									<img class="img-fluid lazy" th:with="counter=${counter+1}"  th:if="${counter<=1}" th:each="pimage : ${product.productimage}" th:src="'/img/products/'+${pimage.path}" th:data-src="'/img/products/'+${pimage.path}" alt=""  > 
 								</a>
 								<div data-countdown="2019/05/15" class="countdown"></div>
 							</figure>
